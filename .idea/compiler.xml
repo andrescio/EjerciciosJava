@@ -14,7 +14,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="block1-process-file-and-streams" target="19" />
       <module name="demo" target="19" />
       <module name="Main" target="19" />
       <module name="prueba" target="1.5" />
