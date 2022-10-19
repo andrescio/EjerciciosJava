@@ -7,10 +7,11 @@
         <option value="$PROJECT_DIR$/LecturaFicherosFiltradoStream/pom.xml" />
         <option value="$PROJECT_DIR$/block1-expression-evaluator/pom.xml" />
         <option value="$PROJECT_DIR$/block3-maven-package/pom.xml" />
+        <option value="$PROJECT_DIR$/block5-command-line-runner/pom.xml" />
       </list>
     </option>
   </component>
-  <component name="ProjectRootManager">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_19" project-jdk-name="openjdk-19" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
 </project>
