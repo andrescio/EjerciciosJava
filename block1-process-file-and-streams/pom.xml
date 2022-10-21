@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.example</groupId>
-    <artifactId>LecturaFicherosFiltradoStream</artifactId>
+    <artifactId>block1-process-file-and-streams</artifactId>
     <version>1.0-SNAPSHOT</version>
     <properties>
         <maven.compiler.source>19</maven.compiler.source>

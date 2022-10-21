@@ -10,12 +10,14 @@
         <module name="block1-expression-evaluator" />
         <module name="block5-command-line-runner" />
         <module name="block5-properties" />
+        <module name="block5-logging" />
         <module name="block3-maven-package" />
         <module name="block1-process-file-and-streams" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="demo" target="19" />
+      <module name="LecturaFicherosFiltradoStream" target="19" />
       <module name="Main" target="19" />
       <module name="prueba" target="1.5" />
     </bytecodeTargetLevel>
@@ -24,6 +26,7 @@
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Main" options="-parameters" />
       <module name="block5-command-line-runner" options="-parameters" />
+      <module name="block5-logging" options="-parameters" />
       <module name="block5-properties" options="-parameters" />
       <module name="demo" options="-parameters" />
     </option>
