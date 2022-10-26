@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "8bb4cab3-9586-4f48-b500-c3401a02a394",
+		"name": "block6-person-controllers",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/controlador1/addPersona",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/controlador1/addPersona?name=Torrente&edad=40&ciudad=Madrid",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"controlador1",
+						"addPersona"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "Torrente"
+						},
+						{
+							"key": "edad",
+							"value": "40"
+						},
+						{
+							"key": "ciudad",
+							"value": "Madrid"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/controlador2/getPersona",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/controlador2/getPersona",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"controlador2",
+						"getPersona"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/controlador1/addCiudad",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\":\"Málaga\",\r\n    \"numeroHabitantes\": 5000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/controlador1/addCiudad",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"controlador1",
+						"addCiudad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/controlador1/getCiudad",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/controlador2/getCiudad",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"controlador2",
+						"getCiudad"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/controlador/bean/bean1",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/controlador/bean/bean1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"controlador",
+						"bean",
+						"bean1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
