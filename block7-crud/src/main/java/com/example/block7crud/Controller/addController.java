@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+//Controlador que recibe una petición POST para añadir a una Persona
 @RestController
 @RequestMapping("/persona")
 public class addController {

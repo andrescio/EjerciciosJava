@@ -4,11 +4,11 @@ import com.example.block7crud.Services.PersonaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+// Controlar que recibe una petición DELETE con un id que borra a la Persona con ese ID
 @RestController
 @RequestMapping(value="/persona")
 @ResponseBody
 public class DeleteController {
-
     @Autowired
     private PersonaServiceImpl personaServiceImpl;
 

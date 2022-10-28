@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+// Modelo de una persona. Getters y setters generados de forma automática con Lombok
 @Data
 @Entity
 @Table

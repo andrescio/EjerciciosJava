@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+// Clase que actúa como servicio de la clase persona. Implementa los métodos necesarios para efectuar los CRUD
 @Service
 public class PersonaServiceImpl implements PersonaService {
     @Autowired

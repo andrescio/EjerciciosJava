@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+// Controlador que recibe una petición PUT que modifica los datos de una persona ya existente
 @RestController
 @RequestMapping("/persona")
 public class UpdateController {
-
     @Autowired
     private PersonaServiceImpl personaServiceImpl;
 

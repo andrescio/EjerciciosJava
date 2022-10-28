@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Optional;
 
+// Controlador que recibe una petición GET y busca a la Persona tanto por id como por nombre
 @RestController
 @RequestMapping("/persona")
 public class GetController {
-
     @Autowired
     private PersonaServiceImpl personaServiceImpl;
 
