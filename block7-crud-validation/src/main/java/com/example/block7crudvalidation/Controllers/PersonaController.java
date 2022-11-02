@@ -1,5 +1,7 @@
 package com.example.block7crudvalidation.Controllers;
 
+import com.example.block7crudvalidation.Exceptions.EntityNotFoundException;
+import com.example.block7crudvalidation.Exceptions.UnprocessableEntityException;
 import com.example.block7crudvalidation.Models.Persona;
 import com.example.block7crudvalidation.Models.PersonaDTO;
 import com.example.block7crudvalidation.Services.PersonaServiceImpl;
@@ -7,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/persona")
@@ -21,8 +22,8 @@ public class PersonaController {
         try{
             return personaServiceImpl.addPersona(persona).toString();
         }
-        catch(Exception e){
-            return e.toString();
+        catch(UnprocessableEntityException e){
+            return e.getCustomError().toString();
         }
     }
 
@@ -32,8 +33,8 @@ public class PersonaController {
         try{
             return personaServiceImpl.getPersonaById(id).toString();
         }
-        catch(Exception e){
-            return e.toString();
+        catch(EntityNotFoundException e){
+            return e.getCustomError().toString();
         }
     }
 
@@ -57,14 +58,13 @@ public class PersonaController {
                 persona.getName() == null || persona.getCompany_email() == null ||
                 persona.getPersonal_email() == null || persona.getCity() == null ||
                 persona.getActive() == null) {
-            return "Los campos 'id_persona', 'usuario', 'password', 'name', 'company_email'," +
-                    "'personal_email', 'city' y 'active' son obligatorios";
+            return new UnprocessableEntityException().getCustomError().toString();
         }
         try{
             return personaServiceImpl.updatePersona(persona).toString();
         }
-        catch(Exception e){
-            return e.toString();
+        catch(EntityNotFoundException e){
+            return e.getCustomError().toString();
         }
     }
 
@@ -75,8 +75,8 @@ public class PersonaController {
             personaServiceImpl.deletePersona(id);
             return "Borrado correctamente";
         }
-        catch(Exception e){
-            return "No existe el id de la persona que intenta eliminar";
+        catch(EntityNotFoundException e){
+            return e.getCustomError().toString();
         }
     }
 }

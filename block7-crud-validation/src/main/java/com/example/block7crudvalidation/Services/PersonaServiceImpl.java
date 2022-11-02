@@ -1,5 +1,7 @@
 package com.example.block7crudvalidation.Services;
 
+import com.example.block7crudvalidation.Exceptions.EntityNotFoundException;
+import com.example.block7crudvalidation.Exceptions.UnprocessableEntityException;
 import com.example.block7crudvalidation.Interfaces.PersonaRepository;
 import com.example.block7crudvalidation.Interfaces.PersonaService;
 import com.example.block7crudvalidation.Models.Persona;
@@ -22,20 +24,19 @@ public class PersonaServiceImpl implements PersonaService {
     // Método que recibe una persona a través del controlador PersonaController, hace las validaciones y la añade si
     // está correcto. En caso contrario lanza una excepción.
     @Override
-    public Persona addPersona(Persona persona) throws Exception {
+    public Persona addPersona(Persona persona) throws UnprocessableEntityException {
         Date date = new Date();
 
         // Comprueba que los campos obligatorios no sean nulos
         if(persona.getUsuario() == null || persona.getPassword() == null || persona.getName() == null ||
                 persona.getCompany_email() == null || persona.getPersonal_email() == null || persona.getCity() == null ||
                 persona.getActive() == null){
-            throw new Exception("Los campos 'usuario', 'password', 'name', 'company_email'," +
-                    "'personal_email', 'city' y 'active' son obligatorios");
+            throw new UnprocessableEntityException();
         }
 
         //Comprueba la longitud del nombre de usuario
         if(persona.getUsuario().length() > 10 || persona.getUsuario().length() < 6){
-            throw new Exception("El usuario no puede contener más de 10 caracteres ni menos de 6");
+            throw new UnprocessableEntityException();
         }
 
         persona.setCreated_date(date);
@@ -45,10 +46,10 @@ public class PersonaServiceImpl implements PersonaService {
 
     // Método que actualiza los datos de una persona
     @Override
-    public Persona updatePersona(Persona persona) throws Exception {
+    public Persona updatePersona(Persona persona) throws EntityNotFoundException {
         Optional<Persona> personaAModificar = personaRepository.findById(persona.getId_persona());
         if(personaAModificar.isEmpty() == true){
-            throw new Exception("No existe la persona que quiere modificar");
+            throw new EntityNotFoundException();
         }
         personaRepository.save(persona);
         return persona;
@@ -56,20 +57,20 @@ public class PersonaServiceImpl implements PersonaService {
 
     // Método que borra una persona según su ID
     @Override
-    public void deletePersona(int id) throws Exception {
+    public void deletePersona(int id) throws EntityNotFoundException {
         Optional personaABorrar = personaRepository.findById(id);
         if(personaABorrar.isEmpty() == true){
-            throw new Exception("No existe ese id en ninguna persona");
+            throw new EntityNotFoundException();
         }
         personaRepository.deleteById(id);
     }
 
     // Devuelve un objeto PersonaDTO con los valores de la Persona con el id que se pase por parámetro
     @Override
-    public PersonaDTO getPersonaById(int id) throws Exception {
+    public PersonaDTO getPersonaById(int id) throws EntityNotFoundException {
         Optional<Persona> persona = personaRepository.findById(id);
         if(persona.isEmpty() == true){
-            throw new Exception("No hay personas con ese id");
+            throw new EntityNotFoundException();
         }
         PersonaDTO personaDTO = new PersonaDTO(persona.get().getId_persona(),
                                                 persona.get().getUsuario(),
@@ -106,12 +107,12 @@ public class PersonaServiceImpl implements PersonaService {
         List<PersonaDTO> listaPersonasDTO = new ArrayList<>();
         listaPersonas.forEach(persona -> {
             PersonaDTO personaDTO = new PersonaDTO(persona.getId_persona(),
-                    persona.getUsuario(),
-                    persona.getName(),
-                    persona.getSurname(),
-                    persona.getCompany_email(),
-                    persona.getPersonal_email(),
-                    persona.getCity());
+                                                    persona.getUsuario(),
+                                                    persona.getName(),
+                                                    persona.getSurname(),
+                                                    persona.getCompany_email(),
+                                                    persona.getPersonal_email(),
+                                                    persona.getCity());
             listaPersonasDTO.add(personaDTO);
         });
         return listaPersonasDTO;
