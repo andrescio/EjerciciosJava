@@ -11,12 +11,13 @@
         <module name="block5-logging" />
         <module name="block7-crud" />
         <module name="block1-expression-evaluator" />
-        <module name="block5-command-line-runner" />
         <module name="block5-profiles" />
+        <module name="block3-maven-package" />
+        <module name="ejercicio-controller-chuchi" />
+        <module name="block5-command-line-runner" />
         <module name="block5-properties" />
         <module name="block6-simple-controllers" />
         <module name="block6-person-controllers" />
-        <module name="block3-maven-package" />
         <module name="block1-process-file-and-streams" />
         <module name="block6-path-variable-headers" />
       </profile>
@@ -41,6 +42,7 @@
       <module name="block7-crud" options="-parameters" />
       <module name="block7-crud-validation" options="-parameters" />
       <module name="demo" options="-parameters" />
+      <module name="ejercicio-controller-chuchi" options="-parameters" />
     </option>
   </component>
 </project>
