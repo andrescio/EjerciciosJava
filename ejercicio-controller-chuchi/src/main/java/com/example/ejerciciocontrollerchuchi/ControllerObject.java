@@ -1,11 +1,8 @@
 package com.example.ejerciciocontrollerchuchi;
 
-import org.springframework.stereotype.Controller;
-
 import java.util.List;
 import java.util.Map;
 
-@Controller
 public class ControllerObject {
     List<String> paths;
     Map<String,String[]> queries;
