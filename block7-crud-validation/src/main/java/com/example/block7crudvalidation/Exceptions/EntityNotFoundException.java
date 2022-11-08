@@ -14,6 +14,11 @@ public class EntityNotFoundException extends RuntimeException {
         customError = new CustomError(date, 404, "Registro no existente");
     }
 
+    public EntityNotFoundException(String message){
+        Date date = new Date();
+        customError = new CustomError(date, 404, message);
+    }
+
     public CustomError getCustomError() {
         return customError;
     }

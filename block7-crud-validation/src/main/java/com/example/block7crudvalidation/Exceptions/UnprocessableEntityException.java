@@ -15,6 +15,11 @@ public class UnprocessableEntityException extends RuntimeException{
         customError = new CustomError(date, 422, "Los campos no cumplen los requisitos");
     }
 
+    public UnprocessableEntityException(String message){
+        Date date = new Date();
+        customError = new CustomError(date, 422, message);
+    }
+
     public CustomError getCustomError() {
         return customError;
     }

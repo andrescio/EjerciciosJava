@@ -1,6 +1,6 @@
-package com.example.block7crudvalidation.Interfaces;
+package com.example.block7crudvalidation.Persona.Infraestructure.Repository;
 
-import com.example.block7crudvalidation.Models.Persona;
+import com.example.block7crudvalidation.Persona.Model.Persona;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;

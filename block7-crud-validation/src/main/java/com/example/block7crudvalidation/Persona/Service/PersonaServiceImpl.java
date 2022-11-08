@@ -1,11 +1,11 @@
-package com.example.block7crudvalidation.Services;
+package com.example.block7crudvalidation.Persona.Service;
 
 import com.example.block7crudvalidation.Exceptions.EntityNotFoundException;
 import com.example.block7crudvalidation.Exceptions.UnprocessableEntityException;
-import com.example.block7crudvalidation.Interfaces.PersonaRepository;
-import com.example.block7crudvalidation.Interfaces.PersonaService;
-import com.example.block7crudvalidation.Models.Persona;
-import com.example.block7crudvalidation.Models.PersonaDTO;
+import com.example.block7crudvalidation.Persona.Infraestructure.Repository.PersonaRepository;
+import com.example.block7crudvalidation.Persona.Model.Persona;
+import com.example.block7crudvalidation.Persona.Infraestructure.dto.PersonaDTO;
+import com.example.block7crudvalidation.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
@@ -20,6 +20,8 @@ import java.util.Optional;
 public class PersonaServiceImpl implements PersonaService {
     @Autowired
     PersonaRepository personaRepository;
+
+    Utils utils = new Utils();
 
     // Método que recibe una persona a través del controlador PersonaController, hace las validaciones y la añade si
     // está correcto. En caso contrario lanza una excepción.
@@ -72,13 +74,7 @@ public class PersonaServiceImpl implements PersonaService {
         if(persona.isEmpty() == true){
             throw new EntityNotFoundException();
         }
-        PersonaDTO personaDTO = new PersonaDTO(persona.get().getId_persona(),
-                                                persona.get().getUsuario(),
-                                                persona.get().getName(),
-                                                persona.get().getSurname(),
-                                                persona.get().getCompany_email(),
-                                                persona.get().getPersonal_email(),
-                                                persona.get().getCity());
+        PersonaDTO personaDTO = utils.getPersonaDTO(persona.get());
         return personaDTO;
     }
 
@@ -88,13 +84,7 @@ public class PersonaServiceImpl implements PersonaService {
         List<Persona> listaPersonas = personaRepository.findByUsuario(usuario);
         List<PersonaDTO> listaPersonasDTO = new ArrayList<>();
         listaPersonas.forEach(persona -> {
-            PersonaDTO personaDTO = new PersonaDTO(persona.getId_persona(),
-                                                    persona.getUsuario(),
-                                                    persona.getName(),
-                                                    persona.getSurname(),
-                                                    persona.getCompany_email(),
-                                                    persona.getPersonal_email(),
-                                                    persona.getCity());
+            PersonaDTO personaDTO = utils.getPersonaDTO(persona);
             listaPersonasDTO.add(personaDTO);
         });
         return listaPersonasDTO;
@@ -106,13 +96,7 @@ public class PersonaServiceImpl implements PersonaService {
         List<Persona> listaPersonas = Streamable.of(personaRepository.findAll()).toList();
         List<PersonaDTO> listaPersonasDTO = new ArrayList<>();
         listaPersonas.forEach(persona -> {
-            PersonaDTO personaDTO = new PersonaDTO(persona.getId_persona(),
-                                                    persona.getUsuario(),
-                                                    persona.getName(),
-                                                    persona.getSurname(),
-                                                    persona.getCompany_email(),
-                                                    persona.getPersonal_email(),
-                                                    persona.getCity());
+            PersonaDTO personaDTO = utils.getPersonaDTO(persona);
             listaPersonasDTO.add(personaDTO);
         });
         return listaPersonasDTO;

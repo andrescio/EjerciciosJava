@@ -14,4 +14,13 @@ public class CustomError {
     Date timestamp;
     int HttpCode;
     String message;
+
+    @Override
+    public String toString() {
+        return "CustomError{" +
+                "\n    timestamp: " + timestamp +
+                ",\n    HttpCode: " + HttpCode +
+                ",\n    message: '" + message + '\'' +
+                "\n}";
+    }
 }

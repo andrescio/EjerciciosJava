@@ -1,10 +1,9 @@
-package com.example.block7crudvalidation.Interfaces;
+package com.example.block7crudvalidation.Persona.Service;
 
-import com.example.block7crudvalidation.Models.Persona;
-import com.example.block7crudvalidation.Models.PersonaDTO;
+import com.example.block7crudvalidation.Persona.Model.Persona;
+import com.example.block7crudvalidation.Persona.Infraestructure.dto.PersonaDTO;
 
 import java.util.List;
-import java.util.Optional;
 
 // Interface con los métodos que tiene que implementar el PersonaServiceImpl
 public interface PersonaService {

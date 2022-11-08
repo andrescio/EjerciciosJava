@@ -1,10 +1,10 @@
-package com.example.block7crudvalidation.Controllers;
+package com.example.block7crudvalidation.Persona.Infraestructure.Controller;
 
 import com.example.block7crudvalidation.Exceptions.EntityNotFoundException;
 import com.example.block7crudvalidation.Exceptions.UnprocessableEntityException;
-import com.example.block7crudvalidation.Models.Persona;
-import com.example.block7crudvalidation.Models.PersonaDTO;
-import com.example.block7crudvalidation.Services.PersonaServiceImpl;
+import com.example.block7crudvalidation.Persona.Model.Persona;
+import com.example.block7crudvalidation.Persona.Infraestructure.dto.PersonaDTO;
+import com.example.block7crudvalidation.Persona.Service.PersonaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
