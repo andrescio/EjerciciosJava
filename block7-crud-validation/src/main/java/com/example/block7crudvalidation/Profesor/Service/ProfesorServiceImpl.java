@@ -1,11 +1,14 @@
 package com.example.block7crudvalidation.Profesor.Service;
 
 import com.example.block7crudvalidation.Exceptions.EntityNotFoundException;
+import com.example.block7crudvalidation.Exceptions.UnprocessableEntityException;
 import com.example.block7crudvalidation.Persona.Infraestructure.Repository.PersonaRepository;
 import com.example.block7crudvalidation.Persona.Model.Persona;
 import com.example.block7crudvalidation.Profesor.Infraestructure.Repository.ProfesorRepository;
 import com.example.block7crudvalidation.Profesor.Model.Profesor;
 import com.example.block7crudvalidation.Profesor.Infraestructure.dto.ProfesorFullDTO;
+import com.example.block7crudvalidation.Student.Infraestructure.Repository.StudentRepository;
+import com.example.block7crudvalidation.Student.Model.Student;
 import com.example.block7crudvalidation.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
@@ -24,14 +27,23 @@ public class ProfesorServiceImpl implements ProfesorService{
     @Autowired
     PersonaRepository personaRepository;
 
+    @Autowired
+    StudentRepository studentRepository;
+
     Utils utils = new Utils();
 
     // Método que añade un profesor a la BBDD
     @Override
-    public Profesor addProfesor(Profesor profesor) throws EntityNotFoundException {
+    public Profesor addProfesor(Profesor profesor) throws EntityNotFoundException, UnprocessableEntityException {
         Optional<Persona> persona = personaRepository.findById(profesor.getPersona().getId_persona());
         if(persona.isEmpty() == true){
             throw new EntityNotFoundException();
+        }
+        // Comprueba que la Persona que se intenta asignar no sea ya Profesor o Student
+        Optional<Student> personaStudent = studentRepository.findByPersona(persona.get());
+        Optional<Profesor> personaProfesor = profesorRepository.findByPersona(persona.get());
+        if(!personaProfesor.isEmpty() || !personaStudent.isEmpty()){
+            throw new UnprocessableEntityException("Esa Persona ya está asignada");
         }
         profesor.setPersona(persona.get());
         profesor = profesorRepository.save(profesor);
@@ -48,6 +60,14 @@ public class ProfesorServiceImpl implements ProfesorService{
         }
         if(searchProfesor.isEmpty()){
             throw new EntityNotFoundException("No existe el profesor, verifique la ID");
+        }
+        // Comprueba que la Persona que se intenta asignar no sea ya Profesor o Student
+        // y que, en caso de serlo, sea el propio Profesor que se intenta actualizar
+        Optional<Student> personaStudent = studentRepository.findByPersona(persona.get());
+        Optional<Profesor> personaProfesor = profesorRepository.findByPersona(persona.get());
+        if(!personaProfesor.isEmpty() && personaProfesor.get().getId_profesor() != profesor.getId_profesor() ||
+                !personaStudent.isEmpty()){
+            throw new UnprocessableEntityException("Esa Persona ya está asignada");
         }
         return profesorRepository.save(profesor);
     }

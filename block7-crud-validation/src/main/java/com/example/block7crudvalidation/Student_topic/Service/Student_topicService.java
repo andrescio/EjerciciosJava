@@ -9,6 +9,6 @@ public interface Student_topicService {
     Student_topic addStudent_topic(Student_topic student_topic) throws Exception;
     Student_topic updateStudent_topic(Student_topic student_topic) throws Exception;
     void deleteStudent_topic(int id) throws Exception;
-    String getStudent_topic(int id, String outputType) throws Exception;
-    List<String> findAllStudent_topic(String outputType);
+    String getStudent_topic(int id) throws Exception;
+    List<Student_topic> findAllStudent_topic();
 }

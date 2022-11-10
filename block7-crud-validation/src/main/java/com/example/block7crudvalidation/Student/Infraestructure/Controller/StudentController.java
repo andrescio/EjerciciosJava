@@ -37,6 +37,9 @@ public class StudentController {
         catch(EntityNotFoundException e){
             return e.getCustomError().toString();
         }
+        catch(UnprocessableEntityException e){
+            return e.getCustomError().toString();
+        }
     }
 
     // Recibe una petición GET y devuelve el Student después de pasarle los datos al studentServiceImpl
@@ -80,6 +83,9 @@ public class StudentController {
             return studentServiceImpl.updateStudent(student).toString();
         }
         catch(EntityNotFoundException e){
+            return e.getCustomError().toString();
+        }
+        catch(UnprocessableEntityException e){
             return e.getCustomError().toString();
         }
     }

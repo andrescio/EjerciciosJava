@@ -21,6 +21,7 @@ public class PersonaServiceImpl implements PersonaService {
     @Autowired
     PersonaRepository personaRepository;
 
+    @Autowired
     Utils utils = new Utils();
 
     // Método que recibe una persona a través del controlador PersonaController, hace las validaciones y la añade si
@@ -50,7 +51,7 @@ public class PersonaServiceImpl implements PersonaService {
     @Override
     public Persona updatePersona(Persona persona) throws EntityNotFoundException {
         Optional<Persona> personaAModificar = personaRepository.findById(persona.getId_persona());
-        if(personaAModificar.isEmpty() == true){
+        if(personaAModificar.isEmpty()){
             throw new EntityNotFoundException();
         }
         personaRepository.save(persona);
@@ -60,45 +61,47 @@ public class PersonaServiceImpl implements PersonaService {
     // Método que borra una persona según su ID
     @Override
     public void deletePersona(int id) throws EntityNotFoundException {
-        Optional personaABorrar = personaRepository.findById(id);
-        if(personaABorrar.isEmpty() == true){
+        Optional<Persona> personaABorrar = personaRepository.findById(id);
+        if(personaABorrar.isEmpty()){
             throw new EntityNotFoundException();
         }
         personaRepository.deleteById(id);
     }
 
-    // Devuelve un objeto PersonaDTO con los valores de la Persona con el id que se pase por parámetro
+    // Devuelve un String con el dto de la Persona pasándole como parámetro el id de la persona y
+    // un string de si quiere el resultado completo o simple
     @Override
-    public PersonaDTO getPersonaById(int id) throws EntityNotFoundException {
+    public String getPersonaById(int id, String outputType) throws EntityNotFoundException {
+        // Comprueba que existe la Persona con ese id
         Optional<Persona> persona = personaRepository.findById(id);
-        if(persona.isEmpty() == true){
+        if(persona.isEmpty()){
             throw new EntityNotFoundException();
         }
-        PersonaDTO personaDTO = utils.getPersonaDTO(persona.get());
-        return personaDTO;
+        return utils.getPersonaDTO(persona.get(), outputType);
     }
 
     // Devuelve una lista de PersonaDTO según el usuario que se pase por parámetro
     @Override
-    public List<PersonaDTO> findByUsuario(String usuario) {
+    public List<String> findByUsuario(String usuario, String outputType) {
+        // Guarda en listaPersonas las personas que tengan como usuario el que se especifique en la petición
         List<Persona> listaPersonas = personaRepository.findByUsuario(usuario);
-        List<PersonaDTO> listaPersonasDTO = new ArrayList<>();
-        listaPersonas.forEach(persona -> {
-            PersonaDTO personaDTO = utils.getPersonaDTO(persona);
-            listaPersonasDTO.add(personaDTO);
-        });
+        List<String> listaPersonasDTO = new ArrayList<>();
+        // Por cada persona encontrada, saca su DTO a través del método utils.getPersonaDTO
+        // y lo guarda en listaPersonasDTO
+        listaPersonas.forEach(persona -> listaPersonasDTO.add(utils.getPersonaDTO(persona, outputType)));
         return listaPersonasDTO;
     }
 
-    // Devuelve todas las personas que haya como una lista de PersonaDTO
+    // Devuelve todas las personas que haya como una lista de String. Si se especifica que quiere sus
+    // valores completos con outputType, los saca a través del método utils.getPersonaDTO
     @Override
-    public List<PersonaDTO> findAllPersonas() {
+    public List<String> findAllPersonas(String outputType) {
+        // Guarda en listaPersonas las personas existentes
         List<Persona> listaPersonas = Streamable.of(personaRepository.findAll()).toList();
-        List<PersonaDTO> listaPersonasDTO = new ArrayList<>();
-        listaPersonas.forEach(persona -> {
-            PersonaDTO personaDTO = utils.getPersonaDTO(persona);
-            listaPersonasDTO.add(personaDTO);
-        });
+        List<String> listaPersonasDTO = new ArrayList<>();
+        // Por cada persona encontrada, saca su DTO a través del método utils.getPersonaDTO
+        // y lo guarda en listaPersonasDTO
+        listaPersonas.forEach(persona -> listaPersonasDTO.add(utils.getPersonaDTO(persona, outputType)));
         return listaPersonasDTO;
     }
 }

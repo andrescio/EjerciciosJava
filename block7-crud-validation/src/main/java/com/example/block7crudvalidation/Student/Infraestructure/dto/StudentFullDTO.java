@@ -43,7 +43,12 @@ public class StudentFullDTO {
                 "\n    }" +
                 ",\n    num_hours_week: " + num_hours_week +
                 ",\n    comments: '" + comments + '\'' +
-                ",\n    profesor: " + profesor +
+                ",\n    profesor: {" +
+                "\n        id_profesor: " + profesor.getId_profesor() +
+                ",\n        persona: " + profesor.getPersona().getId_persona() +
+                ",\n        coments: " + profesor.getComments() +
+                ",\n        branch: " + profesor.getBranch() +
+                "\n    }" +
                 ",\n    branch: '" + branch + '\'' +
                 ",\n    estudios: " + estudios +
                 "\n}";

@@ -38,12 +38,15 @@ public class ProfesorController {
         catch(EntityNotFoundException e){
             return e.getCustomError().toString();
         }
+        catch(UnprocessableEntityException e){
+            return e.getCustomError().toString();
+        }
     }
 
     // Recibe una petición PUT para actualizar los datos de un profesor. Si está correcto, llama a
     // profesorServiceImpl para que lo actualice
     @PutMapping
-    public String updateStudent(@Valid @RequestBody Profesor profesor,
+    public String updateProfesor(@Valid @RequestBody Profesor profesor,
                                 BindingResult bindingResult)
     {
         // Validación de Profesor
@@ -57,8 +60,10 @@ public class ProfesorController {
         catch(EntityNotFoundException e){
             return e.getCustomError().toString();
         }
+        catch(UnprocessableEntityException e){
+            return e.getCustomError().toString();
+        }
     }
-
 
     // Recibe una petición GET y devuelve el Profesor después de pasarle los datos al sprofesorServiceImpl
     @GetMapping("/{id}")

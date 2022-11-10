@@ -1,7 +1,10 @@
 package com.example.block7crudvalidation.Student.Service;
 
 import com.example.block7crudvalidation.Exceptions.EntityNotFoundException;
+import com.example.block7crudvalidation.Exceptions.UnprocessableEntityException;
 import com.example.block7crudvalidation.Persona.Infraestructure.Repository.PersonaRepository;
+import com.example.block7crudvalidation.Profesor.Infraestructure.Repository.ProfesorRepository;
+import com.example.block7crudvalidation.Profesor.Model.Profesor;
 import com.example.block7crudvalidation.Student.Infraestructure.Repository.StudentRepository;
 import com.example.block7crudvalidation.Persona.Model.Persona;
 import com.example.block7crudvalidation.Student.Model.Student;
@@ -28,23 +31,34 @@ public class StudentServiceImpl implements StudentService {
     PersonaRepository personaRepository;
 
     @Autowired
+    ProfesorRepository profesorRepository;
+
+    @Autowired
     Student_topicRepository student_topicRepository;
 
     Utils utils = new Utils();
 
     // Método que añade a un estudiante
     @Override
-    public Student addStudent(Student student) throws EntityNotFoundException {
+    public Student addStudent(Student student) throws EntityNotFoundException, UnprocessableEntityException {
+        //Comprueba que existen tanto la Persona como el Profesor
         Optional<Persona> persona = personaRepository.findById(student.getPersona().getId_persona());
+        Optional<Profesor> profesor = profesorRepository.findById(student.getProfesor().getId_profesor());
         List<Student_topic> studies = new ArrayList<>();
-        if(persona.isEmpty()){
+        if(persona.isEmpty() || profesor.isEmpty()){
             throw new EntityNotFoundException();
         }
-        // Si se indicaron asignaturas, comprueba que existan
+        // Comprueba que la Persona que se intenta asignar no sea ya Profesor o Student
+        Optional<Student> personaStudent = studentRepository.findByPersona(persona.get());
+        Optional<Profesor> personaProfesor = profesorRepository.findByPersona(persona.get());
+        if(!personaStudent.isEmpty() || !personaProfesor.isEmpty()){
+            throw new UnprocessableEntityException("Esa Persona ya está asignada");
+        }
+        // Si se indicaron asignaturas, comprueba que existen
         if(student.getStudies() != null){
             for(Student_topic student_topic: student.getStudies()){
                 Optional<Student_topic> student_topicActual = student_topicRepository.
-                        findById(student_topic.getId_student_topic());
+                                                              findById(student_topic.getId_student_topic());
                 if(student_topicActual.isEmpty()){
                     throw new EntityNotFoundException("No existe la asignatura asignada");
                 }
@@ -52,27 +66,37 @@ public class StudentServiceImpl implements StudentService {
             }
         }
         student.setPersona(persona.get());
+        student.setProfesor(profesor.get());
         student.setStudies(studies);
-        student = studentRepository.save(student);
-        return student;
+        return studentRepository.save(student);
     }
 
     // Método que modifica a un estudiante
     @Override
-    public Student updateStudent(Student student) throws EntityNotFoundException {
+    public Student updateStudent(Student student) throws EntityNotFoundException, UnprocessableEntityException {
+        //Comprueba que existen tanto la Persona como el Profesor o el propio Student
         Optional<Persona> persona = personaRepository.findById(student.getPersona().getId_persona());
+        Optional<Profesor> profesor = profesorRepository.findById(student.getProfesor().getId_profesor());
         Optional<Student> searchStudent = studentRepository.findById(student.getId_student());
-        if(persona.isEmpty()){
+        if(persona.isEmpty() || profesor.isEmpty()){
             throw new EntityNotFoundException();
         }
         if(searchStudent.isEmpty()){
             throw new EntityNotFoundException("No existe el estudiante, verifique la ID");
         }
-        // Si se indicaron asignaturas, comprueba que existan
+        // Comprueba que la Persona que se intenta asignar no sea ya Profesor o Student
+        // y que, en caso de serlo, sea el propio Student que se intenta actualizar
+        Optional<Student> personaStudent = studentRepository.findByPersona(persona.get());
+        Optional<Profesor> personaProfesor = profesorRepository.findByPersona(persona.get());
+        if(!personaStudent.isEmpty() && personaStudent.get().getId_student() != student.getId_student() ||
+                !personaProfesor.isEmpty()){
+            throw new UnprocessableEntityException("Esa Persona ya está asignada");
+        }
+        // Si se indicaron asignaturas, comprueba que existen
         if(student.getStudies() != null){
             for(Student_topic student_topic: student.getStudies()){
                 Optional<Student_topic> student_topicActual = student_topicRepository.
-                        findById(student_topic.getId_student_topic());
+                                                              findById(student_topic.getId_student_topic());
                 if(student_topicActual.isEmpty()){
                     throw new EntityNotFoundException("No existe la asignatura asignada");
                 }
@@ -108,12 +132,13 @@ public class StudentServiceImpl implements StudentService {
         }
     }
 
-    // Método que busca a todos los estudiantes y los devuelve como una lista de String, ya que el DTO que
-    // contiene dicha lista
+    // Método que busca a todos los estudiantes y los devuelve como una lista de String.
     @Override
     public List<String> findAllStudents(String outputType) {
         List<Student> listStudents = Streamable.of(studentRepository.findAll()).toList();
         List<String> listStudentsDTO = new ArrayList<>();
+        // Añade a listStudentsDTO el estudiante como un String, y si se especifica que quiere todos
+        // sus datos, invoca a utils para que los saque.
         listStudents.forEach(student -> {
             if(outputType.equals("full")){
                 listStudentsDTO.add(utils.getStudentFullDTO(student).toString());

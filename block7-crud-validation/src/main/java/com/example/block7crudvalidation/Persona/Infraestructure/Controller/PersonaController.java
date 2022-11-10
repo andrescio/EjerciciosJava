@@ -29,25 +29,32 @@ public class PersonaController {
 
     // Devuelve una persona basándose en su id
     @GetMapping("/{id}")
-    public String getPersonaById(@PathVariable int id){
+    public String getPersonaById(@PathVariable int id,
+                                 @RequestParam(required = false) String outputType)
+    {
         try{
-            return personaServiceImpl.getPersonaById(id).toString();
+            if(outputType == null){
+                outputType = "simple";
+            }
+            return personaServiceImpl.getPersonaById(id,outputType);
         }
         catch(EntityNotFoundException e){
             return e.getCustomError().toString();
         }
     }
 
-    // Devuelve personas según su nombre de usuario
+    // Devuelve personas según su nombre de usuario. Se puede especificar si se desea su información
+    // simple o completa (full)
     @GetMapping("/usuario/{usuario}")
-    public String findPersonaByUsuario(@PathVariable String usuario){
-        return personaServiceImpl.findByUsuario(usuario).toString();
+    public String findPersonaByUsuario(@PathVariable String usuario,
+                                       @RequestParam(required = false) String outputType){
+        return personaServiceImpl.findByUsuario(usuario,outputType).toString();
     }
 
     // Devuelve la lista de todas las personas
     @GetMapping("/all")
-    public List<PersonaDTO> findAllPersonas(){
-        return personaServiceImpl.findAllPersonas();
+    public String findAllPersonas(@RequestParam(required = false) String outputType){
+        return personaServiceImpl.findAllPersonas(outputType).toString();
     }
 
     // Método que recibe los datos de una persona existente y los cambia mediante

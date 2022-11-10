@@ -10,7 +10,7 @@ public interface PersonaService {
     Persona addPersona(Persona persona) throws Exception;
     Persona updatePersona(Persona persona) throws Exception;
     void deletePersona(int id) throws Exception;
-    PersonaDTO getPersonaById(int id) throws Exception;
-    List<PersonaDTO> findByUsuario(String usuario);
-    List<PersonaDTO> findAllPersonas();
+    String getPersonaById(int id, String outputType) throws Exception;
+    List<String> findByUsuario(String usuario, String outputType);
+    List<String> findAllPersonas(String outputType);
 }

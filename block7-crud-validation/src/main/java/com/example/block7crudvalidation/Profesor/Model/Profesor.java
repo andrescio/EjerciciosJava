@@ -1,6 +1,7 @@
 package com.example.block7crudvalidation.Profesor.Model;
 
 import com.example.block7crudvalidation.Persona.Model.Persona;
+import com.google.gson.annotations.Expose;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import javax.validation.constraints.NotNull;
 public class Profesor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Expose
     Integer id_profesor;
 
     @NotNull
@@ -25,10 +27,12 @@ public class Profesor {
     Persona persona;
 
     @Column
+    @Expose
     String comments;
 
     @NotEmpty
     @Column
+    @Expose
     String branch;
 
     @Override

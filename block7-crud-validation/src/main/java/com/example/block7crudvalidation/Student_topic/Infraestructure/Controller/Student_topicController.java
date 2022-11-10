@@ -2,16 +2,12 @@ package com.example.block7crudvalidation.Student_topic.Infraestructure.Controlle
 
 import com.example.block7crudvalidation.Exceptions.EntityNotFoundException;
 import com.example.block7crudvalidation.Exceptions.UnprocessableEntityException;
-import com.example.block7crudvalidation.Student.Model.Student;
 import com.example.block7crudvalidation.Student_topic.Model.Student_topic;
 import com.example.block7crudvalidation.Student_topic.Service.Student_topicServiceImpl;
 import com.example.block7crudvalidation.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -43,5 +39,52 @@ public class Student_topicController {
         }
     }
 
+    // Recibe una petición GET y devuelve el Student_topic después de pasarle los datos al student_topicServiceImpl
+    @GetMapping("/{id}")
+    public String getStudent_topicById(@PathVariable int id) {
+        try{
+            return student_topicServiceImpl.getStudent_topic(id).toString();
+        }
+        catch (EntityNotFoundException e){
+            return e.getCustomError().toString();
+        }
+    }
 
+    // Recibe una petición GET a la que le devuelve la lista de todos los student_topic que recibe
+    // del método findAllStudent_topic de la clase student_topicServiceImpl
+    @GetMapping("/all")
+    public String findAllStudent_topic(){
+        return student_topicServiceImpl.findAllStudent_topic().toString();
+    }
+
+    // Recibe una petición PUT para actualizar los datos de un profesor. Si está correcto, llama a
+    // profesorServiceImpl para que lo actualice
+    @PutMapping
+    public String updateStudent_topic(@Valid @RequestBody Student_topic student_topic,
+                                BindingResult bindingResult)
+    {
+        // Validación de Student_topic
+        if(bindingResult.hasErrors()){
+            String errors = utils.showErrors(bindingResult);
+            return new UnprocessableEntityException(errors).getCustomError().toString();
+        }
+        try{
+            return student_topicServiceImpl.updateStudent_topic(student_topic).toString();
+        }
+        catch(EntityNotFoundException e){
+            return e.getCustomError().toString();
+        }
+    }
+
+    // Recibe una petición delete con un id y llama a la función delete de student_topicServiceImpl para borrarlo
+    @DeleteMapping("/{id}")
+    public String deleteStudent_topic(@PathVariable int id) {
+        try{
+            student_topicServiceImpl.deleteStudent_topic(id);
+            return "Borrado correctamente";
+        }
+        catch(EntityNotFoundException e){
+            return e.getCustomError().toString();
+        }
+    }
 }
