@@ -1,8 +1,11 @@
 package com.example.block7crudvalidation.Persona.Model;
 
+import com.example.block7crudvalidation.StringPrefixedSequenceIdGenerator;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Parameter;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -15,8 +18,16 @@ import java.util.Date;
 @NoArgsConstructor
 public class Persona {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id_persona;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "persona_seq")
+    @GenericGenerator(
+            name = "persona_seq",
+            strategy = "com.example.block7crudvalidation.StringPrefixedSequenceIdGenerator",
+            parameters = {
+                    @Parameter(name = StringPrefixedSequenceIdGenerator.INCREMENT_PARAM, value = "1"),
+                    @Parameter(name = StringPrefixedSequenceIdGenerator.VALUE_PREFIX_PARAMETER, value = "Persona_")
+            })
+
+    String id_persona;
 
     @Column
     String usuario;

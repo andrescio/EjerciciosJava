@@ -9,6 +9,8 @@ import com.example.block7crudvalidation.Profesor.Model.Profesor;
 import com.example.block7crudvalidation.Profesor.Infraestructure.dto.ProfesorFullDTO;
 import com.example.block7crudvalidation.Student.Infraestructure.Repository.StudentRepository;
 import com.example.block7crudvalidation.Student.Model.Student;
+import com.example.block7crudvalidation.Student_topic.Infraestructure.Repository.Student_topicRepository;
+import com.example.block7crudvalidation.Student_topic.Model.Student_topic;
 import com.example.block7crudvalidation.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
@@ -29,6 +31,9 @@ public class ProfesorServiceImpl implements ProfesorService{
 
     @Autowired
     StudentRepository studentRepository;
+
+    @Autowired
+    Student_topicRepository student_topicRepository;
 
     Utils utils = new Utils();
 
@@ -74,10 +79,17 @@ public class ProfesorServiceImpl implements ProfesorService{
 
     // Método que elimina a un Profesor
     @Override
-    public void deleteProfesor(int id) throws EntityNotFoundException {
-        Optional deletedProfesor = profesorRepository.findById(id);
+    public void deleteProfesor(int id) throws EntityNotFoundException, UnprocessableEntityException {
+        Optional<Profesor> deletedProfesor = profesorRepository.findById(id);
         if(deletedProfesor.isEmpty()){
             throw new EntityNotFoundException();
+        }
+        // Comprueba que no sea profesor de un alumno o asignatura. En caso de serlo, lanza una excepción
+        List<Student> profesorStudent = studentRepository.findByProfesor(deletedProfesor.get());
+        List<Student_topic> profesorTopic = student_topicRepository.findByProfesor(deletedProfesor.get());
+        if(profesorStudent.size() != 0 || profesorTopic.size() != 0){
+            throw new UnprocessableEntityException("El profesor tiene estudiantes o asignaturas asignados, " +
+                    "borrelos primero");
         }
         profesorRepository.deleteById(id);
     }

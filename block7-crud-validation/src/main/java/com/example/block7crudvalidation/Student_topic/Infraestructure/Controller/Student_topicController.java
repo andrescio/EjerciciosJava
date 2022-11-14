@@ -14,7 +14,6 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/student_topic")
 public class Student_topicController {
-
     @Autowired
     Student_topicServiceImpl student_topicServiceImpl;
 
@@ -84,6 +83,20 @@ public class Student_topicController {
             return "Borrado correctamente";
         }
         catch(EntityNotFoundException e){
+            return e.getCustomError().toString();
+        }
+        catch(UnprocessableEntityException e){
+            return e.getCustomError().toString();
+        }
+    }
+
+    // Método que recibe una llamada GET para devolver las asignaturas de un estudiante
+    @GetMapping("/student/{id}")
+    public String getTopicStudent(@PathVariable int id) {
+        try{
+            return student_topicServiceImpl.getTopicStudent(id).toString();
+        }
+        catch (EntityNotFoundException e) {
             return e.getCustomError().toString();
         }
     }

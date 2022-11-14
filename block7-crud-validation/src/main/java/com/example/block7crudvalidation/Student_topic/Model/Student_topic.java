@@ -7,6 +7,8 @@ import com.google.gson.annotations.Expose;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
@@ -25,14 +27,9 @@ public class Student_topic {
     Integer id_student_topic;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_profesor")
     Profesor profesor;
-
-    //@NotNull
-   // @ManyToMany(mappedBy = "studies")
-    //@JoinColumn(name = "id_student")
-    //List<Student> students;
 
     @NotEmpty
     @Column

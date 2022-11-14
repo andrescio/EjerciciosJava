@@ -9,8 +9,8 @@ import java.util.List;
 public interface PersonaService {
     Persona addPersona(Persona persona) throws Exception;
     Persona updatePersona(Persona persona) throws Exception;
-    void deletePersona(int id) throws Exception;
-    String getPersonaById(int id, String outputType) throws Exception;
+    void deletePersona(String id) throws Exception;
+    String getPersonaById(String id, String outputType) throws Exception;
     List<String> findByUsuario(String usuario, String outputType);
     List<String> findAllPersonas(String outputType);
 }

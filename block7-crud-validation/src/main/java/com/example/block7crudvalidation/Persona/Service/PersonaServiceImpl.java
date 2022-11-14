@@ -5,6 +5,10 @@ import com.example.block7crudvalidation.Exceptions.UnprocessableEntityException;
 import com.example.block7crudvalidation.Persona.Infraestructure.Repository.PersonaRepository;
 import com.example.block7crudvalidation.Persona.Model.Persona;
 import com.example.block7crudvalidation.Persona.Infraestructure.dto.PersonaDTO;
+import com.example.block7crudvalidation.Profesor.Infraestructure.Repository.ProfesorRepository;
+import com.example.block7crudvalidation.Profesor.Model.Profesor;
+import com.example.block7crudvalidation.Student.Infraestructure.Repository.StudentRepository;
+import com.example.block7crudvalidation.Student.Model.Student;
 import com.example.block7crudvalidation.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
@@ -20,6 +24,12 @@ import java.util.Optional;
 public class PersonaServiceImpl implements PersonaService {
     @Autowired
     PersonaRepository personaRepository;
+
+    @Autowired
+    ProfesorRepository profesorRepository;
+
+    @Autowired
+    StudentRepository studentRepository;
 
     @Autowired
     Utils utils = new Utils();
@@ -60,10 +70,16 @@ public class PersonaServiceImpl implements PersonaService {
 
     // Método que borra una persona según su ID
     @Override
-    public void deletePersona(int id) throws EntityNotFoundException {
+    public void deletePersona(String id) throws EntityNotFoundException, UnprocessableEntityException {
         Optional<Persona> personaABorrar = personaRepository.findById(id);
         if(personaABorrar.isEmpty()){
             throw new EntityNotFoundException();
+        }
+        // Comprueba que esa persona no sea Studient ni Profesor a la hora de eliminarla. Si lo es lanza una excepción
+        Optional<Profesor> profesorDeleted = profesorRepository.findByPersona(personaABorrar.get());
+        Optional<Student> studentDeleted = studentRepository.findByPersona(personaABorrar.get());
+        if(!profesorDeleted.isEmpty() || !studentDeleted.isEmpty()){
+            throw new UnprocessableEntityException("La persona es o estudiante o profesor, borre ese registro primero");
         }
         personaRepository.deleteById(id);
     }
@@ -71,7 +87,7 @@ public class PersonaServiceImpl implements PersonaService {
     // Devuelve un String con el dto de la Persona pasándole como parámetro el id de la persona y
     // un string de si quiere el resultado completo o simple
     @Override
-    public String getPersonaById(int id, String outputType) throws EntityNotFoundException {
+    public String getPersonaById(String id, String outputType) throws EntityNotFoundException {
         // Comprueba que existe la Persona con ese id
         Optional<Persona> persona = personaRepository.findById(id);
         if(persona.isEmpty()){

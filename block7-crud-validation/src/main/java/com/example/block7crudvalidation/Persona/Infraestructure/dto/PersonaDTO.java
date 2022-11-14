@@ -12,7 +12,7 @@ import javax.persistence.Column;
 @AllArgsConstructor
 public class PersonaDTO {
     @Expose
-    Integer id_persona;
+    String id_persona;
     @Expose
     String usuario;
     @Expose

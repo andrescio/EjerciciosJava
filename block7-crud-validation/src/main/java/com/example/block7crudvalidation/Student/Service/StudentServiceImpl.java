@@ -149,4 +149,32 @@ public class StudentServiceImpl implements StudentService {
         });
         return listStudentsDTO;
     }
+
+    // Método que asigna una lista de Student_topic a un Student
+    @Override
+    public Student assignStudent_topic(List<Student_topic> student_topics, int idStudent) throws EntityNotFoundException{
+        // Verifica que existen las asignaturas y el estudiante
+        Optional<Student> studentExistent = studentRepository.findById(idStudent);
+        if(studentExistent.isEmpty()){
+            throw new EntityNotFoundException("No existe el Student");
+        }
+        // Lista de las Student_topic que tiene actualmente
+        List<Student_topic> actualStudent_topic = studentExistent.get().getStudies();
+        Optional<Student_topic> student_topicExistent;
+        // Comprueba que existen los Student_topic que se le intentan asignar.
+        for(Student_topic student_topic: student_topics){
+            student_topicExistent = student_topicRepository.findById(student_topic.getId_student_topic());
+            if(student_topicExistent.isEmpty()){
+                throw new EntityNotFoundException("No existe alguno de los Student_topic");
+            }
+            // Por cada iteración del bucle añade el Student_topic a la lista de actualStudent_topic, excepto si
+            // ya está en ella.
+            if(!actualStudent_topic.contains(student_topicExistent.get())){
+                actualStudent_topic.add(student_topicExistent.get());
+            }
+        }
+        // Modifica al Student añadiendo la lista de sus antiguos Student_topic junto a los nuevos
+        studentExistent.get().setStudies(actualStudent_topic);
+        return studentRepository.save(studentExistent.get());
+    }
 }

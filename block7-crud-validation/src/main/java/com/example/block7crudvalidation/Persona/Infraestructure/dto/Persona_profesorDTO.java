@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class Persona_profesorDTO {
 
     @Expose
-    Integer id_persona;
+    String id_persona;
 
     @Expose
     String usuario;
@@ -35,22 +35,5 @@ public class Persona_profesorDTO {
     @Expose
     Profesor profesor;
 
-    @Override
-    public String toString() {
-        return "Persona_profesorDTO{" +
-                "\n   id_persona: " + id_persona +
-                ",\n   usuario: '" + usuario + '\'' +
-                ",\n   name: '" + name + '\'' +
-                ",\n   surname: '" + surname + '\'' +
-                ",\n   company_email: '" + company_email + '\'' +
-                ",\n   personal_email: '" + personal_email + '\'' +
-                ",\n   city: '" + city + '\'' +
-                ",\n   profesor: {" +
-                "\n      id_profesor: " + profesor.getId_profesor() +
-                ",\n      persona: " + profesor.getPersona().getId_persona() +
-                ",\n      coments: " + profesor.getComments() +
-                ",\n      branch: " + profesor.getBranch() +
-                "\n   }" +
-                "\n}";
-    }
+
 }

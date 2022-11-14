@@ -4,12 +4,14 @@ import com.example.block7crudvalidation.Exceptions.EntityNotFoundException;
 import com.example.block7crudvalidation.Exceptions.UnprocessableEntityException;
 import com.example.block7crudvalidation.Student.Model.Student;
 import com.example.block7crudvalidation.Student.Service.StudentServiceImpl;
+import com.example.block7crudvalidation.Student_topic.Model.Student_topic;
 import com.example.block7crudvalidation.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping("/student")
@@ -96,6 +98,18 @@ public class StudentController {
         try{
             studentServiceImpl.deleteStudent(id);
             return "Borrado correctamente";
+        }
+        catch(EntityNotFoundException e){
+            return e.getCustomError().toString();
+        }
+    }
+
+    // Recibe una petición PUT para asignar una o más asignaturas a un estudiante
+    @PutMapping("/student_topic/{idStudent}")
+    public String assignStudent_topic(@RequestBody List<Student_topic> student_topic,
+                                      @PathVariable int idStudent){
+        try{
+            return studentServiceImpl.assignStudent_topic(student_topic, idStudent).toString();
         }
         catch(EntityNotFoundException e){
             return e.getCustomError().toString();

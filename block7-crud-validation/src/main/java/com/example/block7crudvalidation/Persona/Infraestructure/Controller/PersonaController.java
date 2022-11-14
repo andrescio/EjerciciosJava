@@ -29,7 +29,7 @@ public class PersonaController {
 
     // Devuelve una persona basándose en su id
     @GetMapping("/{id}")
-    public String getPersonaById(@PathVariable int id,
+    public String getPersonaById(@PathVariable String id,
                                  @RequestParam(required = false) String outputType)
     {
         try{
@@ -61,7 +61,7 @@ public class PersonaController {
     // el método updatePersona de personaServiceImpl
     @PutMapping
     public String updatePersona(@RequestBody Persona persona){
-        if(persona.getId_persona() == 0 || persona.getUsuario() == null || persona.getPassword() == null ||
+        if(persona.getId_persona() == null || persona.getUsuario() == null || persona.getPassword() == null ||
                 persona.getName() == null || persona.getCompany_email() == null ||
                 persona.getPersonal_email() == null || persona.getCity() == null ||
                 persona.getActive() == null) {
@@ -77,12 +77,15 @@ public class PersonaController {
 
     // Recibe una petición delete con un id y llama a la función delete de personaServiceImpl para borrarla
     @DeleteMapping("/{id}")
-    public String deletePersona(@PathVariable int id) {
+    public String deletePersona(@PathVariable String id) {
         try{
             personaServiceImpl.deletePersona(id);
             return "Borrado correctamente";
         }
         catch(EntityNotFoundException e){
+            return e.getCustomError().toString();
+        }
+        catch(UnprocessableEntityException e){
             return e.getCustomError().toString();
         }
     }

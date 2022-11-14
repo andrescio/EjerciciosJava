@@ -101,5 +101,8 @@ public class ProfesorController {
         catch(EntityNotFoundException e){
             return e.getCustomError().toString();
         }
+        catch(UnprocessableEntityException e){
+            return e.getCustomError().toString();
+        }
     }
 }

@@ -11,4 +11,5 @@ public interface Student_topicService {
     void deleteStudent_topic(int id) throws Exception;
     String getStudent_topic(int id) throws Exception;
     List<Student_topic> findAllStudent_topic();
+    List<Student_topic> getTopicStudent(int id);
 }

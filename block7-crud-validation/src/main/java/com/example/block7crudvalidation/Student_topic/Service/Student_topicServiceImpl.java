@@ -68,12 +68,17 @@ public class Student_topicServiceImpl implements Student_topicService{
 
     // Método que elimina a un Student_topic
     @Override
-    public void deleteStudent_topic(int id) throws EntityNotFoundException {
-        Optional deletedStudent_topic = student_topicRepository.findById(id);
+    public void deleteStudent_topic(int id) throws EntityNotFoundException, UnprocessableEntityException {
+        Optional<Student_topic> deletedStudent_topic = student_topicRepository.findById(id);
         if(deletedStudent_topic.isEmpty()){
             throw new EntityNotFoundException();
         }
-        profesorRepository.deleteById(id);
+        // Comprueba que no tenga estudiantes con su asignatura a la hora de borrarse
+        List<Student> students = studentRepository.findByStudies(deletedStudent_topic.get());
+        if(students.size() != 0){
+            throw new UnprocessableEntityException("Tiene students a cargo, elimínelos antes");
+        }
+        student_topicRepository.deleteById(id);
     }
 
     // Método que busca un Student_topic por ID
@@ -92,4 +97,15 @@ public class Student_topicServiceImpl implements Student_topicService{
         List<Student_topic> listStudent_topic = Streamable.of(student_topicRepository.findAll()).toList();
         return listStudent_topic;
     }
+
+    // Método que devuelve las asignaturas de un estudiante, recibiendo su id como parámetro
+    @Override
+    public List<Student_topic> getTopicStudent(int id) throws EntityNotFoundException {
+        Optional<Student> student = studentRepository.findById(id);
+        if(student.isEmpty()){
+            throw new EntityNotFoundException();
+        }
+        return student.get().getStudies();
+    }
+
 }

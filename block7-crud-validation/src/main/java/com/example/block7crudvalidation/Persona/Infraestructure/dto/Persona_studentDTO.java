@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class Persona_studentDTO {
 
     @Expose
-    Integer id_persona;
+    String id_persona;
 
     @Expose
     String usuario;
@@ -36,45 +36,5 @@ public class Persona_studentDTO {
     @Expose
     Student student;
 
-    @Override
-    public String toString() {
-        String studies = "";
-        for(Student_topic topic : student.getStudies()){
-            studies += "\n            Student_topic: {";
-            studies += "\n                id_student_topic: "+topic.getId_student_topic();
-            studies += ",\n                id_profesor: "+topic.getProfesor().getId_profesor();
-            studies += ",\n                course: "+topic.getCourse();
-            studies += ",\n                comment: "+topic.getComment();
-            studies += ",\n                initial_date: "+topic.getInitial_date();
-            studies += ",\n                finish_date: "+topic.getFinish_date();
-            studies += "\n            }";
-        }
-        if(!studies.equals("")){
-            studies = studies + "\n         ]";
-        }
 
-        return "Persona_studentDTO{" +
-                "\n    id_persona: " + id_persona +
-                ",\n    usuario: '" + usuario + '\'' +
-                ",\n    name: '" + name + '\'' +
-                ",\n    surname: '" + surname + '\'' +
-                ",\n    company_email: '" + company_email + '\'' +
-                ",\n    personal_email: '" + personal_email + '\'' +
-                ",\n    city: '" + city + '\'' +
-                "\n    student: {" +
-                "\n        id_student: " + student.getId_student() +
-                ",\n        id_persona: " + student.getPersona().getId_persona() +
-                ",\n        num_hours_week: " + student.getNum_hours_week() +
-                ",\n        comments: '" + student.getComments() + '\'' +
-                ",\n        profesor: {" +
-                "\n            id_profesor: " + student.getProfesor().getId_profesor() +
-                ",\n            persona: " + student.getProfesor().getPersona().getId_persona() +
-                ",\n            coments: " + student.getProfesor().getComments() +
-                ",\n            branch: " + student.getProfesor().getBranch() +
-                "\n         }" +
-                ",\n        branch: '" + student.getBranch() + '\'' +
-                ",\n        studies: [" + studies +
-                "\n    }" +
-                "\n}";
-    }
 }

@@ -9,7 +9,7 @@
 			"name": "Persona",
 			"item": [
 				{
-					"name": "http://localhost:8080/persona",
+					"name": "Añadir Persona",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -37,12 +37,12 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/persona/id",
+					"name": "Borrar Persona",
 					"request": {
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/persona/1",
+							"raw": "http://localhost:8080/persona/Persona_1",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -50,20 +50,20 @@
 							"port": "8080",
 							"path": [
 								"persona",
-								"1"
+								"Persona_1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/persona",
+					"name": "Modificar Persona",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_persona\": 1,\r\n    \"usuario\": \"usuario\",\r\n    \"password\": \"Pass\",\r\n    \"name\": \"ManoloCambiado\",\r\n    \"company_email\": \"company_email\",\r\n    \"personal_email\": \"personal_email\",\r\n    \"city\": \"Madrid\",\r\n    \"active\": true\r\n}",
+							"raw": "{\r\n    \"id_persona\": \"Persona_1\",\r\n    \"usuario\": \"usuario\",\r\n    \"password\": \"Pass\",\r\n    \"name\": \"ManoloCambiado\",\r\n    \"company_email\": \"company_email\",\r\n    \"personal_email\": \"personal_email\",\r\n    \"city\": \"Madrid\",\r\n    \"active\": true\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -85,12 +85,12 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/persona/id",
+					"name": "Buscar Persona por ID",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/persona/1",
+							"raw": "http://localhost:8080/persona/Persona_1?outputType=full",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -98,19 +98,25 @@
 							"port": "8080",
 							"path": [
 								"persona",
-								"1"
+								"Persona_1"
+							],
+							"query": [
+								{
+									"key": "outputType",
+									"value": "full"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/persona/usuario/usuario",
+					"name": "Buscar Persona por Usuario",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/persona/usuario/usuario",
+							"raw": "http://localhost:8080/persona/usuario/usuario?outputType=full",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -120,18 +126,24 @@
 								"persona",
 								"usuario",
 								"usuario"
+							],
+							"query": [
+								{
+									"key": "outputType",
+									"value": "full"
+								}
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/persona/all",
+					"name": "Buscar todas las Persona",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:8080/persona/all",
+							"raw": "http://localhost:8080/persona/all?outputType=full",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -140,6 +152,12 @@
 							"path": [
 								"persona",
 								"all"
+							],
+							"query": [
+								{
+									"key": "outputType",
+									"value": "full"
+								}
 							]
 						}
 					},
@@ -151,13 +169,13 @@
 			"name": "Student",
 			"item": [
 				{
-					"name": "http://localhost:8080/student",
+					"name": "Añadir Student",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"persona\":{\r\n        \"id_persona\": 1\r\n    },\r\n    \"num_hours_week\": 50,\r\n    \"comments\": \"Ninguno\",\r\n    \"branch\": \"Fullstack\",\r\n    \"studies\": [{\r\n        \"id_student_topic\": 1\r\n    }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"persona\":{\r\n        \"id_persona\": \"Persona_2\"\r\n    },\r\n    \"profesor\":{\r\n        \"id_profesor\": 1\r\n    },\r\n    \"num_hours_week\": 50,\r\n    \"comments\": \"Ninguno\",\r\n    \"branch\": \"Fullstack\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -179,13 +197,13 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/student",
+					"name": "Modificar Student",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_student\": 1,\r\n    \"persona\": {\r\n        \"id_persona\": 1\r\n    },\r\n    \"num_hours_week\": 50,\r\n    \"comments\": \"Modificado\",\r\n    \"branch\": \"Fullstack\",\r\n    \"studies\": [{\r\n        \"id_student_topic\": 1\r\n    }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"id_student\":1,\r\n    \"persona\": {\r\n        \"id_persona\": \"Persona_2\"\r\n    },\r\n    \"profesor\":{\r\n        \"id_profesor\": 1\r\n    },\r\n    \"num_hours_week\": 50,\r\n    \"comments\": \"Modificado\",\r\n    \"branch\": \"Fullstack\",\r\n    \"studies\": [{\r\n        \"id_student_topic\": 1\r\n    }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -207,7 +225,37 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/student/id",
+					"name": "Asignar Student_topic",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\"id_student_topic\": 1},\r\n    {\"id_student_topic\": 2}\r\n]\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/student/student_topic/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student",
+								"student_topic",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Student",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -227,7 +275,7 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/student/id",
+					"name": "Buscar Student por ID",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -253,7 +301,7 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/student/all",
+					"name": "Buscar todos los Student",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -284,13 +332,13 @@
 			"name": "Profesor",
 			"item": [
 				{
-					"name": "http://localhost:8080/profesor",
+					"name": "Añadir Profesor",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"persona\":{\r\n        \"id_persona\": 1\r\n    },\r\n    \"comments\": \"Ninguno\",\r\n    \"branch\": \"Fullstack\"\r\n}",
+							"raw": "{\r\n    \"persona\":{\r\n        \"id_persona\": \"Persona_1\"\r\n    },\r\n    \"comments\": \"Ninguno\",\r\n    \"branch\": \"Fullstack\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -312,13 +360,13 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/profesor",
+					"name": "Modificar Profesor",
 					"request": {
 						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"id_profesor\": 1,\r\n    \"persona\":{\r\n        \"id_persona\": 1\r\n    },\r\n    \"comments\": \"Ninguno\",\r\n    \"branch\": \"Fullstack\"\r\n}",
+							"raw": "{\r\n    \"id_profesor\": 1,\r\n    \"persona\":{\r\n        \"id_persona\": \"Persona_1\"\r\n    },\r\n    \"comments\": \"Ninguno\",\r\n    \"branch\": \"Fullstack\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -340,7 +388,7 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/profesor/id",
+					"name": "Eliminar Profesor",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -360,7 +408,7 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/profesor/id",
+					"name": "Buscar Profesor por ID",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -386,7 +434,7 @@
 					"response": []
 				},
 				{
-					"name": "http://localhost:8080/profesor/all",
+					"name": "Buscar todos los Profesor",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -417,7 +465,7 @@
 			"name": "Student_topic",
 			"item": [
 				{
-					"name": "http://localhost:8080/studentTopic",
+					"name": "Añadir Student_topic",
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -439,6 +487,115 @@
 							"port": "8080",
 							"path": [
 								"student_topic"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Modificar Student_Topic",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id_student_topic\": 1,\r\n    \"profesor\":{\r\n        \"id_profesor\": 1\r\n    },\r\n    \"course\": \"BBDD\",\r\n    \"comment\": \"Ninguno\",\r\n    \"initial_date\": \"2023-09-28\",\r\n    \"finish_date\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/student_topic",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student_topic"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Student_Topic",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/student_topic/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student_topic",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Student_topic por ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/student_topic/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student_topic",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar todos los Student_topic",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/student_topic/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student_topic",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Student_topic por Student",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/student_topic/student/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"student_topic",
+								"student",
+								"1"
 							]
 						}
 					},
