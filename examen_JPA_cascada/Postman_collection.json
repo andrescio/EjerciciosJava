@@ -1,0 +1,78 @@
+{
+	"info": {
+		"_postman_id": "e316d8b2-5f3e-409e-8062-3992a9991b49",
+		"name": "examen_JPA_cascada",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:8080/factura",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/factura",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"factura"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/factura/id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/factura/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"factura",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/factura/linea/id",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"producto\": \"NuevoProducto\",\r\n    \"cantidad\": 5,\r\n    \"importe\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/factura/linea/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"factura",
+						"linea",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
