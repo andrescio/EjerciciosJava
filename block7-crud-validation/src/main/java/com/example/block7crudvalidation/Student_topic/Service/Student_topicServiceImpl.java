@@ -2,22 +2,16 @@ package com.example.block7crudvalidation.Student_topic.Service;
 
 import com.example.block7crudvalidation.Exceptions.EntityNotFoundException;
 import com.example.block7crudvalidation.Exceptions.UnprocessableEntityException;
-import com.example.block7crudvalidation.Persona.Infraestructure.Repository.PersonaRepository;
-import com.example.block7crudvalidation.Persona.Infraestructure.dto.PersonaDTO;
-import com.example.block7crudvalidation.Persona.Model.Persona;
 import com.example.block7crudvalidation.Profesor.Infraestructure.Repository.ProfesorRepository;
-import com.example.block7crudvalidation.Profesor.Infraestructure.dto.ProfesorFullDTO;
 import com.example.block7crudvalidation.Profesor.Model.Profesor;
 import com.example.block7crudvalidation.Student.Infraestructure.Repository.StudentRepository;
 import com.example.block7crudvalidation.Student.Model.Student;
 import com.example.block7crudvalidation.Student_topic.Infraestructure.Repository.Student_topicRepository;
 import com.example.block7crudvalidation.Student_topic.Model.Student_topic;
-import com.example.block7crudvalidation.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,15 +22,10 @@ public class Student_topicServiceImpl implements Student_topicService{
     Student_topicRepository student_topicRepository;
 
     @Autowired
-    PersonaRepository personaRepository;
-
-    @Autowired
     StudentRepository studentRepository;
 
     @Autowired
     ProfesorRepository profesorRepository;
-
-    Utils utils = new Utils();
 
     // Método que añade un student_topic a la BBDD. Lanza excepción si no se encuentra la persona o estudiante
     // del student_topic

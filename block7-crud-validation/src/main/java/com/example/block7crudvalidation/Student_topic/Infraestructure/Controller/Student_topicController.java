@@ -42,7 +42,7 @@ public class Student_topicController {
     @GetMapping("/{id}")
     public String getStudent_topicById(@PathVariable int id) {
         try{
-            return student_topicServiceImpl.getStudent_topic(id).toString();
+            return student_topicServiceImpl.getStudent_topic(id);
         }
         catch (EntityNotFoundException e){
             return e.getCustomError().toString();

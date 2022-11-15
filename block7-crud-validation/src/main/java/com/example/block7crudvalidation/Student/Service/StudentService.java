@@ -15,4 +15,5 @@ public interface StudentService {
     String getStudentById(int id, String outputType) throws Exception;
     List<String> findAllStudents(String outputType);
     Student assignStudent_topic(List<Student_topic> student_topic, int idStudent);
+    Student deallocateStudent_topic(List<Student_topic> student_topic, int idStudent);
 }

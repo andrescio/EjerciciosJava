@@ -1,7 +1,6 @@
 package com.example.block7crudvalidation.Persona.Infraestructure.dto;
 
 import com.example.block7crudvalidation.Student.Model.Student;
-import com.example.block7crudvalidation.Student_topic.Model.Student_topic;
 import com.google.gson.annotations.Expose;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,6 +34,4 @@ public class Persona_studentDTO {
 
     @Expose
     Student student;
-
-
 }

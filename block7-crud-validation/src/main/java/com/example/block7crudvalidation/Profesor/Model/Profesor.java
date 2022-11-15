@@ -1,7 +1,6 @@
 package com.example.block7crudvalidation.Profesor.Model;
 
 import com.example.block7crudvalidation.Persona.Model.Persona;
-import com.example.block7crudvalidation.Student_topic.Model.Student_topic;
 import com.google.gson.annotations.Expose;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +9,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 
 @Data
 @Entity

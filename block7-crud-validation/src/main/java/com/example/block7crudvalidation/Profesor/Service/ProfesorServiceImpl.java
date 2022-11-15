@@ -41,7 +41,7 @@ public class ProfesorServiceImpl implements ProfesorService{
     @Override
     public Profesor addProfesor(Profesor profesor) throws EntityNotFoundException, UnprocessableEntityException {
         Optional<Persona> persona = personaRepository.findById(profesor.getPersona().getId_persona());
-        if(persona.isEmpty() == true){
+        if(persona.isEmpty()){
             throw new EntityNotFoundException();
         }
         // Comprueba que la Persona que se intenta asignar no sea ya Profesor o Student

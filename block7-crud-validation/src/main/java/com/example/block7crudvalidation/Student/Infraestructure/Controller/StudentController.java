@@ -53,7 +53,7 @@ public class StudentController {
             if(outputType == null){
                 outputType = "simple";
             }
-            return studentServiceImpl.getStudentById(id,outputType).toString();
+            return studentServiceImpl.getStudentById(id,outputType);
         }
         catch (EntityNotFoundException e){
             return e.getCustomError().toString();
@@ -105,11 +105,23 @@ public class StudentController {
     }
 
     // Recibe una petición PUT para asignar una o más asignaturas a un estudiante
-    @PutMapping("/student_topic/{idStudent}")
+    @PutMapping("/student_topic/assign/{idStudent}")
     public String assignStudent_topic(@RequestBody List<Student_topic> student_topic,
                                       @PathVariable int idStudent){
         try{
             return studentServiceImpl.assignStudent_topic(student_topic, idStudent).toString();
+        }
+        catch(EntityNotFoundException e){
+            return e.getCustomError().toString();
+        }
+    }
+
+    // Recibe una petición PUT para desasignar una o más asignaturas a un estudiante
+    @PutMapping("/student_topic/deallocate/{idStudent}")
+    public String deallocateStudent_topic(@RequestBody List<Student_topic> student_topic,
+                                          @PathVariable int idStudent){
+        try{
+            return studentServiceImpl.deallocateStudent_topic(student_topic, idStudent).toString();
         }
         catch(EntityNotFoundException e){
             return e.getCustomError().toString();

@@ -4,7 +4,6 @@ import com.example.block7crudvalidation.Exceptions.EntityNotFoundException;
 import com.example.block7crudvalidation.Exceptions.UnprocessableEntityException;
 import com.example.block7crudvalidation.Persona.Infraestructure.Repository.PersonaRepository;
 import com.example.block7crudvalidation.Persona.Model.Persona;
-import com.example.block7crudvalidation.Persona.Infraestructure.dto.PersonaDTO;
 import com.example.block7crudvalidation.Profesor.Infraestructure.Repository.ProfesorRepository;
 import com.example.block7crudvalidation.Profesor.Model.Profesor;
 import com.example.block7crudvalidation.Student.Infraestructure.Repository.StudentRepository;

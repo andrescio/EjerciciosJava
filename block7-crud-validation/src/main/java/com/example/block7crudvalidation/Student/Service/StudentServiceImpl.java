@@ -108,7 +108,7 @@ public class StudentServiceImpl implements StudentService {
     // Método que elimina a un estudiante
     @Override
     public void deleteStudent(int id) throws EntityNotFoundException {
-        Optional deletedStudent = studentRepository.findById(id);
+        Optional<Student> deletedStudent = studentRepository.findById(id);
         if(deletedStudent.isEmpty()){
             throw new EntityNotFoundException();
         }
@@ -158,7 +158,7 @@ public class StudentServiceImpl implements StudentService {
         if(studentExistent.isEmpty()){
             throw new EntityNotFoundException("No existe el Student");
         }
-        // Lista de las Student_topic que tiene actualmente
+        // Lista de las Student_topic que tiene actualmente el Student
         List<Student_topic> actualStudent_topic = studentExistent.get().getStudies();
         Optional<Student_topic> student_topicExistent;
         // Comprueba que existen los Student_topic que se le intentan asignar.
@@ -174,6 +174,34 @@ public class StudentServiceImpl implements StudentService {
             }
         }
         // Modifica al Student añadiendo la lista de sus antiguos Student_topic junto a los nuevos
+        studentExistent.get().setStudies(actualStudent_topic);
+        return studentRepository.save(studentExistent.get());
+    }
+
+    // Método que desasigna una lista de Student_topic a un Student
+
+    public Student deallocateStudent_topic(List<Student_topic> student_topics, int idStudent){
+        // Verifica que existen las asignaturas y el estudiante
+        Optional<Student> studentExistent = studentRepository.findById(idStudent);
+        if(studentExistent.isEmpty()){
+            throw new EntityNotFoundException("No existe el Student");
+        }
+        // Lista de las Student_topic que tiene actualmente el Student
+        List<Student_topic> actualStudent_topic = studentExistent.get().getStudies();
+        Optional<Student_topic> student_topicExistent;
+        // Comprueba que existen los Student_topic que se le intentan desasignar.
+        for(Student_topic student_topic: student_topics){
+            student_topicExistent = student_topicRepository.findById(student_topic.getId_student_topic());
+            if(student_topicExistent.isEmpty()){
+                throw new EntityNotFoundException("No existe alguno de los Student_topic");
+            }
+            // Por cada iteración del bucle elimina el Student_topic a la lista de actualStudent_topic, excepto si
+            // no está en ella.
+            if(actualStudent_topic.contains(student_topicExistent.get())){
+                actualStudent_topic.remove(student_topicExistent.get());
+            }
+        }
+        // Modifica al Student eliminando de su lista los Student_topic que se hayan solicitado
         studentExistent.get().setStudies(actualStudent_topic);
         return studentRepository.save(studentExistent.get());
     }

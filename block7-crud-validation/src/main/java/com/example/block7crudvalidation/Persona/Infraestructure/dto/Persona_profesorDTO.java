@@ -34,6 +34,4 @@ public class Persona_profesorDTO {
 
     @Expose
     Profesor profesor;
-
-
 }

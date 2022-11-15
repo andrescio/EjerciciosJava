@@ -1,20 +1,15 @@
 package com.example.block7crudvalidation.Student_topic.Model;
 
 import com.example.block7crudvalidation.Profesor.Model.Profesor;
-import com.example.block7crudvalidation.Student.Model.Student;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.google.gson.annotations.Expose;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
 
 @Data
 @Entity

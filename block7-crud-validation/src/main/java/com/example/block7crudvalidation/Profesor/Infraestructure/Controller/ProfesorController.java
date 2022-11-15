@@ -4,7 +4,6 @@ import com.example.block7crudvalidation.Exceptions.EntityNotFoundException;
 import com.example.block7crudvalidation.Exceptions.UnprocessableEntityException;
 import com.example.block7crudvalidation.Profesor.Model.Profesor;
 import com.example.block7crudvalidation.Profesor.Service.ProfesorServiceImpl;
-import com.example.block7crudvalidation.Student.Model.Student;
 import com.example.block7crudvalidation.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.BindingResult;
@@ -74,7 +73,7 @@ public class ProfesorController {
             if(outputType == null){
                 outputType = "simple";
             }
-            return profesorServiceImpl.getProfesorById(id,outputType).toString();
+            return profesorServiceImpl.getProfesorById(id,outputType);
         }
         catch (EntityNotFoundException e){
             return e.getCustomError().toString();
