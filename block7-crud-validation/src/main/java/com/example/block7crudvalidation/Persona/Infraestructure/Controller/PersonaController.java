@@ -2,16 +2,21 @@ package com.example.block7crudvalidation.Persona.Infraestructure.Controller;
 
 import com.example.block7crudvalidation.Exceptions.EntityNotFoundException;
 import com.example.block7crudvalidation.Exceptions.UnprocessableEntityException;
+import com.example.block7crudvalidation.Feign;
 import com.example.block7crudvalidation.Persona.Model.Persona;
 import com.example.block7crudvalidation.Persona.Service.PersonaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
 @RestController
 @RequestMapping("/persona")
 public class PersonaController {
     @Autowired
     PersonaServiceImpl personaServiceImpl;
+
+    @Autowired
+    Feign feign;
 
     // Método que recibe mediante una petición POST una persona y la añade a la BBDD.
     @PostMapping
@@ -85,5 +90,19 @@ public class PersonaController {
         catch(UnprocessableEntityException e){
             return e.getCustomError().toString();
         }
+    }
+
+    // Recibe una petición get para buscar a un profesor. Lo hace a través de un RestTemplate con una petición
+    // GET al controlador de getProfesor de la clase Profesor
+    @GetMapping("/profesor/{id}")
+    public String getProfesor(@PathVariable int id){
+        String url = "http://localhost:8081/profesor/" + id;
+        return new RestTemplate().getForObject(url, String.class);
+    }
+
+    // Recibe una petición GET para buscar a un profesor. Lo busca haciendo uso de Feign
+    @GetMapping("/profesorFeign/{id}")
+    public String getProfesorFeign(@PathVariable int id){
+        return feign.getProfesorById(id);
     }
 }
