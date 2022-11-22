@@ -20,7 +20,7 @@ public class ProfesorFullDTO {
 
     @Override
     public String toString() {
-        return "Profesor{" +
+        return "{" +
                 "\n    id_profesor: " + id_profesor +
                 ",\n    persona: {" +
                 "\n        id_persona: " + persona.getId_persona() +

@@ -46,7 +46,7 @@ public class Student_topic {
 
     @Override
     public String toString() {
-        return "Student_topic{" +
+        return "{" +
                 "\n    id_student_topic: " + id_student_topic +
                 ",\n    profesor: {" +
                 "\n        id_profesor: " + profesor.getId_profesor() +

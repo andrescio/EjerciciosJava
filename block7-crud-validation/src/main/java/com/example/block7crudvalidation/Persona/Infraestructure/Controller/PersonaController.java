@@ -19,6 +19,7 @@ public class PersonaController {
     Feign feign;
 
     // Método que recibe mediante una petición POST una persona y la añade a la BBDD.
+    @CrossOrigin(origins= "https://cdpn.io")
     @PostMapping
     public String addPersona(@RequestBody Persona persona){
         try{
@@ -54,8 +55,12 @@ public class PersonaController {
     }
 
     // Devuelve la lista de todas las personas
+    @CrossOrigin(origins= "https://cdpn.io")
     @GetMapping("/all")
     public String findAllPersonas(@RequestParam(required = false) String outputType){
+        if(outputType == null){
+            outputType = "simple";
+        }
         return personaServiceImpl.findAllPersonas(outputType).toString();
     }
 

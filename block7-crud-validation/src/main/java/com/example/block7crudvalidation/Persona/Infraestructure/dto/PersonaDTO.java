@@ -26,7 +26,7 @@ public class PersonaDTO {
 
     @Override
     public String toString() {
-        return "PersonaDTO{" +
+        return "{" +
                 "\n   id_persona: " + id_persona +
                 ",\n   usuario: '" + usuario + '\'' +
                 ",\n   name: '" + name + '\'' +

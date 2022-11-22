@@ -37,7 +37,7 @@ public class Profesor {
 
     @Override
     public String toString() {
-        return "Profesor{" +
+        return "{" +
                 "\n    id_profesor: " + id_profesor +
                 ",\n    id_persona: " + persona.getId_persona() +
                 ",\n    comments: '" + comments + '\'' +

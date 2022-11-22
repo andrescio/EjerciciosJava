@@ -12,6 +12,7 @@
         <module name="block7-crud" />
         <module name="block1-expression-evaluator" />
         <module name="block5-profiles" />
+        <module name="block10-dockerize-app" />
         <module name="block3-maven-package" />
         <module name="ejercicio-controller-chuchi" />
         <module name="block5-command-line-runner" />
@@ -33,6 +34,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="Main" options="-parameters" />
+      <module name="block10-dockerize-app" options="-parameters" />
       <module name="block5-command-line-runner" options="-parameters" />
       <module name="block5-logging" options="-parameters" />
       <module name="block5-profiles" options="-parameters" />

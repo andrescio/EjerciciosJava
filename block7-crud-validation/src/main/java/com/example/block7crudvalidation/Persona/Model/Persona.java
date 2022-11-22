@@ -64,7 +64,7 @@ public class Persona {
 
     @Override
     public String toString() {
-        return "Persona{" +
+        return "{" +
                 "\n    id_persona: " + id_persona +
                 ",\n    usuario: '" + usuario + '\'' +
                 ",\n    password: '" + password + '\'' +

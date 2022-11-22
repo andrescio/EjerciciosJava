@@ -30,7 +30,7 @@ public class StudentFullDTO {
 
     @Override
     public String toString() {
-        return "StudentFullDTO{" +
+        return "{" +
                 "\n    id_student: " + id_student +
                 ",\n    persona: {" +
                 "\n        id_persona: " + persona.getId_persona() +

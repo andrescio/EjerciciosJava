@@ -56,7 +56,7 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{\n" +
+        return "{\n" +
                 "   id_student: " + id_student +
                 ",\n    id_persona: " + persona.getId_persona() +
                 ",\n    num_hours_week: " + num_hours_week +

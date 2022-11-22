@@ -17,7 +17,7 @@ public class CustomError {
 
     @Override
     public String toString() {
-        return "CustomError{" +
+        return "{" +
                 "\n    timestamp: " + timestamp +
                 ",\n    HttpCode: " + HttpCode +
                 ",\n    message: '" + message + '\'' +
