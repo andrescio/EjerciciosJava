@@ -1,0 +1,144 @@
+{
+	"info": {
+		"_postman_id": "54ebac56-5673-45af-9547-95cbaf9174f5",
+		"name": "block11-upload-download-files",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Upload file",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "fileData",
+							"type": "file",
+							"src": "lobo.jpg"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/file/upload",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"file",
+						"upload"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Upload file with specified type",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "lobo.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/file/upload/jpg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"file",
+						"upload",
+						"jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Download file by id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/file/download/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"file",
+						"download",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Download file by name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/file/download/name/lobo.jpg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"file",
+						"download",
+						"name",
+						"lobo.jpg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set path to download files",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/file/setPath?path=C://prueba",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"file",
+						"setPath"
+					],
+					"query": [
+						{
+							"key": "path",
+							"value": "C://prueba"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
