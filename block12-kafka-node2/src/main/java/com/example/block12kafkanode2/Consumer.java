@@ -12,6 +12,7 @@ public class Consumer {
 
     @KafkaListener(topics = "bosonit-node2", groupId = "group")
     public void consumeMessage(String message){
+        message = "Received message in node 2\n" + message;
         producer.sendMessage(message);
     }
 }
