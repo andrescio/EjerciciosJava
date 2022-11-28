@@ -46,7 +46,7 @@ public class FileController {
         return fileServiceImpl.downloadFileByName(name);
     }
 
-    // Set the path to the downloaded filed
+    // Set the path to the downloaded file
     @GetMapping("/setPath")
     public String setDownloadPath(@RequestParam String path) throws Exception {
         return fileServiceImpl.setDownloadPath(path);

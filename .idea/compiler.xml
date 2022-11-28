@@ -15,6 +15,7 @@
         <module name="block10-dockerize-app" />
         <module name="block3-maven-package" />
         <module name="ejercicio-controller-chuchi" />
+        <module name="block12-kafka" />
         <module name="block5-command-line-runner" />
         <module name="block5-properties" />
         <module name="block6-simple-controllers" />
