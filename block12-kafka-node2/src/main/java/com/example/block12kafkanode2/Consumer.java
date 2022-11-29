@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
+// This class receives messages with bosonit-node2 as topic and calls to te method sendMessage of the Producer class
+// inside this application
 @Service
 public class Consumer {
 

@@ -8,13 +8,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class Controller {
 
+    @Autowired
     Producer producer;
 
-    @Autowired
-    public Controller(Producer producer){
-        this.producer = producer;
-    }
-
+    // Receives a message via Post request and calls to producer.sendMessage() method to send it. There is a Postman
+    // json included inside this application to make this request. It is located just below the pom.xml.
     @PostMapping("/kafka")
     public void messageToTopic (@RequestParam("message") String message){
         producer.sendMessage(message);

@@ -1,0 +1,34 @@
+{
+	"info": {
+		"_postman_id": "7412368b-504d-4ff8-93a7-666e257e5c36",
+		"name": "block12-kafka",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Enviar mensaje",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/kafka?message=Mensaje",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"kafka"
+					],
+					"query": [
+						{
+							"key": "message",
+							"value": "Mensaje"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
