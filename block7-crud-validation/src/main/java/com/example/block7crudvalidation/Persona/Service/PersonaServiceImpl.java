@@ -3,6 +3,7 @@ package com.example.block7crudvalidation.Persona.Service;
 import com.example.block7crudvalidation.Exceptions.EntityNotFoundException;
 import com.example.block7crudvalidation.Exceptions.UnprocessableEntityException;
 import com.example.block7crudvalidation.Persona.Infraestructure.Repository.PersonaRepository;
+import com.example.block7crudvalidation.Persona.Infraestructure.dto.PersonaDTO;
 import com.example.block7crudvalidation.Persona.Model.Persona;
 import com.example.block7crudvalidation.Profesor.Infraestructure.Repository.ProfesorRepository;
 import com.example.block7crudvalidation.Profesor.Model.Profesor;
@@ -10,9 +11,18 @@ import com.example.block7crudvalidation.Student.Infraestructure.Repository.Stude
 import com.example.block7crudvalidation.Student.Model.Student;
 import com.example.block7crudvalidation.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.data.util.Streamable;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -33,6 +43,9 @@ public class PersonaServiceImpl implements PersonaService {
     @Autowired
     Utils utils = new Utils();
 
+    @PersistenceContext
+    private EntityManager entityManager;
+
     // Método que recibe una persona a través del controlador PersonaController, hace las validaciones y la añade si
     // está correcto. En caso contrario lanza una excepción.
     @Override
@@ -47,11 +60,13 @@ public class PersonaServiceImpl implements PersonaService {
         }
 
         //Comprueba la longitud del nombre de usuario
-        if(persona.getUsuario().length() > 10 || persona.getUsuario().length() < 6){
+        if(persona.getUsuario().length() > 10 || persona.getUsuario().length() < 6)
             throw new UnprocessableEntityException();
-        }
 
-        persona.setCreated_date(date);
+        // Si no se le especificó una fecha al crearlo, se le asigna automáticamente la fecha actual
+        if(persona.getCreated_date() == null)
+            persona.setCreated_date(date);
+
         personaRepository.save(persona);
         return persona;
     }
@@ -118,5 +133,58 @@ public class PersonaServiceImpl implements PersonaService {
         // y lo guarda en listaPersonasDTO
         listaPersonas.forEach(persona -> listaPersonasDTO.add(utils.getPersonaDTO(persona, outputType)));
         return listaPersonasDTO;
+    }
+
+    // Método que busca Personas en la base de datos según determinadas condiciones que se le pasen como parámetro
+    @Override
+    public List<PersonaDTO> getCriteriaResult(String clave, String valor, String ordenar, int numPagina) throws ParseException {
+
+        // Creación de variables e instancias de las clases necesarias para utilizar criteriaBuilder
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Persona> query = cb.createQuery(Persona.class);
+        Root<Persona> root = query.from(Persona.class);
+        Predicate criterioBusqueda = null;
+
+        // Comprueba qué se quiere buscar y guarda esa query en criterioBusqueda
+        switch (clave){
+            case "usuario":
+                criterioBusqueda = cb.like(root.get("usuario"), "%" + valor + "%");
+                break;
+            case "name":
+                criterioBusqueda = cb.like(root.get("name"), "%" + valor + "%");
+                break;
+            case "surname":
+                criterioBusqueda = cb.like(root.get("surname"), "%" + valor + "%");
+                break;
+            case "created_date":
+                criterioBusqueda = cb.lessThan(root.get("created_date"),
+                                               new SimpleDateFormat("yyyy/MM/dd").parse(valor));
+                break;
+        }
+
+        // Comprueba si se requiere ordenar la búsqueda y la ordena
+        switch (ordenar){
+            case "usuario":
+                query.orderBy(cb.asc(root.get("usuario")));
+                break;
+            case "name":
+                query.orderBy(cb.asc(root.get("name")));
+                break;
+        }
+
+        // Aplica la query y guarda las personas resultantes en una lista de personas
+        query.where(criterioBusqueda);
+        List<Persona> personas = entityManager.createQuery(query).getResultList();
+        List<PersonaDTO> personasDTO = new ArrayList<>();
+
+        // Convierte la lista de Persona a una lista de PersonaDTO
+        personas.forEach(persona -> personasDTO.add(utils.getPersonaDTO(persona)));
+
+        // Crea la paginación con la clase PagedListHolder
+        PagedListHolder<PersonaDTO> page = new PagedListHolder<PersonaDTO>(personasDTO);
+        page.setPageSize(2); // Número de elementos por página
+        page.setPage(numPagina); // Número de página a mostrar
+
+        return page.getPageList();  // Devuelve la lista paginada de personas
     }
 }

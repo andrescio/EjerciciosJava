@@ -3,11 +3,15 @@ package com.example.block7crudvalidation.Persona.Infraestructure.Controller;
 import com.example.block7crudvalidation.Exceptions.EntityNotFoundException;
 import com.example.block7crudvalidation.Exceptions.UnprocessableEntityException;
 import com.example.block7crudvalidation.Feign;
+import com.example.block7crudvalidation.Persona.Infraestructure.dto.PersonaDTO;
 import com.example.block7crudvalidation.Persona.Model.Persona;
 import com.example.block7crudvalidation.Persona.Service.PersonaServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
+
+import java.text.ParseException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/persona")
@@ -109,5 +113,18 @@ public class PersonaController {
     @GetMapping("/profesorFeign/{id}")
     public String getProfesorFeign(@PathVariable int id){
         return feign.getProfesorById(id);
+    }
+
+    // Recibe una peticion GET para buscar Personas según determinados criterios. Llama al método getCriteriaResult
+    // de personaServiceImpl para conseguir sacarlos
+    @GetMapping("/criteria")
+    public List<PersonaDTO> getCriteriaResult(@RequestParam String clave,
+                                              @RequestParam String valor,
+                                              @RequestParam(required = false) String ordenar,
+                                              @RequestParam int numPagina) throws ParseException {
+        if(ordenar == null){
+            ordenar = "no";
+        }
+        return personaServiceImpl.getCriteriaResult(clave,valor,ordenar,numPagina);
     }
 }
