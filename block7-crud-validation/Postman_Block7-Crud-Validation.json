@@ -204,6 +204,44 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Buscar por CriteriaBuilder",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/persona/criteria?clave=created_date&valor=2015/12/12&ordenar=usuario&numPagina=0",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"persona",
+								"criteria"
+							],
+							"query": [
+								{
+									"key": "clave",
+									"value": "created_date"
+								},
+								{
+									"key": "valor",
+									"value": "2015/12/12"
+								},
+								{
+									"key": "ordenar",
+									"value": "usuario"
+								},
+								{
+									"key": "numPagina",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
