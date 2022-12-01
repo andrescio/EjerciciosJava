@@ -1,0 +1,177 @@
+{
+	"info": {
+		"_postman_id": "39ce6714-ee6a-4d50-8bcc-588a9d589f11",
+		"name": "block13-mongodb",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Añadir Persona",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"usuario\": \"usuario\",\r\n    \"password\": \"Pass\",\r\n    \"name\": \"Manolo\",\r\n    \"surname\": \"Lama\",\r\n    \"company_email\": \"company_email\",\r\n    \"personal_email\": \"personal_email\",\r\n    \"city\": \"Madrid\",\r\n    \"active\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/persona",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Persona por id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persona/6388916bdf4bf06508b17429",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona",
+						"6388916bdf4bf06508b17429"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Borrar Persona",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persona/638886d993e2561fe012b229",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona",
+						"638886d993e2561fe012b229"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar todas las Personas paginadas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persona/all?page=0&size=5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona",
+						"all"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "0"
+						},
+						{
+							"key": "size",
+							"value": "5"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Modificar Persona",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{ \r\n    \"id\": \"6388916bdf4bf06508b17429\",\r\n    \"usuario\": \"usuarioCambiado\",\r\n    \"password\": \"PassCambiada\",\r\n    \"name\": \"ManoloCambiado\",\r\n    \"surname\": \"LamaCambiado\",\r\n    \"company_email\": \"company_email\",\r\n    \"personal_email\": \"personal_email\",\r\n    \"city\": \"Madrid\",\r\n    \"active\": true,\r\n    \"created_date\": null,\r\n    \"imagen_url\": null,\r\n    \"termination_date\": null\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/persona",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Persona por nombre",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persona/name/ManoloCambiado",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona",
+						"name",
+						"ManoloCambiado"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Buscar Persona por usuario",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/persona/usuario/usuarioCambiado",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"persona",
+						"usuario",
+						"usuarioCambiado"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

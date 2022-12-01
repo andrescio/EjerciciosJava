@@ -12,6 +12,7 @@
         <module name="block7-crud" />
         <module name="block1-expression-evaluator" />
         <module name="block5-profiles" />
+        <module name="block13-mongodb" />
         <module name="block10-dockerize-app" />
         <module name="block3-maven-package" />
         <module name="block12-kafka-node2" />
@@ -43,6 +44,7 @@
       <module name="block12-kafka" options="-parameters" />
       <module name="block12-kafka (1)" options="-parameters" />
       <module name="block12-kafka-node2" options="-parameters" />
+      <module name="block13-mongodb" options="-parameters" />
       <module name="block5-command-line-runner" options="-parameters" />
       <module name="block5-logging" options="-parameters" />
       <module name="block5-profiles" options="-parameters" />
