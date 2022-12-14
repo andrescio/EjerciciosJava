@@ -24,6 +24,7 @@
         <option value="$PROJECT_DIR$/block12-kafka/pom.xml" />
         <option value="$PROJECT_DIR$/block12-kafka-node2/pom.xml" />
         <option value="$PROJECT_DIR$/block13-mongodb/pom.xml" />
+        <option value="$PROJECT_DIR$/block15-security/pom.xml" />
       </list>
     </option>
   </component>

@@ -14,6 +14,8 @@
     <file url="file://$PROJECT_DIR$/block12-kafka/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/block13-mongodb/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/block13-mongodb/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/block15-security/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/block15-security/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/block5-command-line-runner/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/block5-command-line-runner/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/block5-logging/src/main/java" charset="UTF-8" />

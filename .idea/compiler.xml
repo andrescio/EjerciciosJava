@@ -16,6 +16,7 @@
         <module name="block10-dockerize-app" />
         <module name="block3-maven-package" />
         <module name="block12-kafka-node2" />
+        <module name="block15-security" />
         <module name="ejercicio-controller-chuchi" />
         <module name="block12-kafka" />
         <module name="block5-command-line-runner" />
@@ -30,6 +31,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="block12-kafka (1)" target="19" />
+      <module name="block7-crud-validation (1)" target="19" />
       <module name="demo" target="17" />
       <module name="LecturaFicherosFiltradoStream" target="19" />
       <module name="Main" target="19" />
@@ -45,6 +47,7 @@
       <module name="block12-kafka (1)" options="-parameters" />
       <module name="block12-kafka-node2" options="-parameters" />
       <module name="block13-mongodb" options="-parameters" />
+      <module name="block15-security" options="-parameters" />
       <module name="block5-command-line-runner" options="-parameters" />
       <module name="block5-logging" options="-parameters" />
       <module name="block5-profiles" options="-parameters" />
@@ -54,6 +57,7 @@
       <module name="block6-simple-controllers" options="-parameters" />
       <module name="block7-crud" options="-parameters" />
       <module name="block7-crud-validation" options="-parameters" />
+      <module name="block7-crud-validation (1)" options="-parameters" />
       <module name="demo" options="-parameters" />
       <module name="ejercicio-controller-chuchi" options="-parameters" />
       <module name="examen_JPA_cascada" options="-parameters" />
