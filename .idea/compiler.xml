@@ -18,6 +18,7 @@
         <module name="block12-kafka-node2" />
         <module name="block15-security" />
         <module name="ejercicio-controller-chuchi" />
+        <module name="block16-spring-cloud" />
         <module name="block12-kafka" />
         <module name="block5-command-line-runner" />
         <module name="block5-properties" />
@@ -48,6 +49,7 @@
       <module name="block12-kafka-node2" options="-parameters" />
       <module name="block13-mongodb" options="-parameters" />
       <module name="block15-security" options="-parameters" />
+      <module name="block16-spring-cloud" options="-parameters" />
       <module name="block5-command-line-runner" options="-parameters" />
       <module name="block5-logging" options="-parameters" />
       <module name="block5-profiles" options="-parameters" />
