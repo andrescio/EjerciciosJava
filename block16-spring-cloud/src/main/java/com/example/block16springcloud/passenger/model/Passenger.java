@@ -33,7 +33,7 @@ public class Passenger {
         return new PassengerDTO_Output( this.id_passenger,
                                         this.name,
                                         this.surname,
-                                        this.age);
+                                        this.email);
     }
 
 }

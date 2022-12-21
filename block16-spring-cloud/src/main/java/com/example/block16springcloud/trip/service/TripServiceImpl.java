@@ -1,5 +1,6 @@
 package com.example.block16springcloud.trip.service;
 
+import com.example.block16springcloud.Feign;
 import com.example.block16springcloud.exception.EntityNotFoundException;
 import com.example.block16springcloud.exception.UnprocessableEntityException;
 import com.example.block16springcloud.passenger.infraestructure.repository.PassengerRepository;
@@ -8,6 +9,7 @@ import com.example.block16springcloud.trip.infraestructure.dto.TripDTO_Input;
 import com.example.block16springcloud.trip.infraestructure.dto.TripDTO_Output;
 import com.example.block16springcloud.trip.infraestructure.repository.TripRepository;
 import com.example.block16springcloud.trip.model.Trip;
+import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,12 @@ public class TripServiceImpl implements TripService{
     @Autowired
     PassengerRepository passengerRepository;
 
+    @Autowired
+    Feign feign;
+
+    Gson gson = new Gson();
+
+
     @Override
     public Trip addTrip(TripDTO_Input tripDTO_input) {
         if(tripDTO_input.getPassengers() != null){
@@ -38,6 +46,10 @@ public class TripServiceImpl implements TripService{
                 actualPassenger.add(verifyPassenger.get());
             }
             tripDTO_input.setPassengers(actualPassenger);
+            // Creates the tickets
+            for(Passenger passenger: tripDTO_input.getPassengers()){
+                feign.addTicket(gson.toJson(passenger), gson.toJson(tripDTO_input));
+            }
         }
 
         return tripRepository.save(tripDTO_input.toTrip());
@@ -61,6 +73,10 @@ public class TripServiceImpl implements TripService{
                 actualPassenger.add(verifyPassenger.get());
             }
             tripDTO_input.setPassengers(actualPassenger);
+            // Creates the tickets
+            for(Passenger passenger: tripDTO_input.getPassengers()){
+                feign.addTicket(gson.toJson(passenger), gson.toJson(tripDTO_input));
+            }
         }
 
         return tripRepository.save(tripDTO_input.toTrip());
@@ -107,6 +123,8 @@ public class TripServiceImpl implements TripService{
         List<Passenger> passengers = verifyTrip.get().getPassengers();
         passengers.add(verifyPassenger.get());
         verifyTrip.get().setPassengers(passengers);
+
+        feign.addTicket(gson.toJson(verifyPassenger.get()), gson.toJson(verifyTrip.get())); // Creates the ticket
         return tripRepository.save(verifyTrip.get()).toDTO();
     }
 
