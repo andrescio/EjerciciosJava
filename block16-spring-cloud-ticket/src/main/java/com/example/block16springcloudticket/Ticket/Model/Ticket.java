@@ -1,9 +1,6 @@
 package com.example.block16springcloudticket.Ticket.Model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,13 +11,15 @@ import java.util.Date;
 @NoArgsConstructor
 @Data
 @Entity
-@Table
+@Table(uniqueConstraints=
+        @UniqueConstraint(columnNames = {"id_passenger", "id_trip"}))
 public class Ticket {
     @Id
     @GeneratedValue
     Integer id_ticket;
 
-    Integer id_passenger;
+    @Column(name="id_passenger")
+    Integer idPassenger;
 
     String passenger_name;
 
@@ -28,7 +27,8 @@ public class Ticket {
 
     String email;
 
-    Integer id_trip;
+    @Column(name="id_trip")
+    Integer idTrip;
 
     String tripOrigin;
 
@@ -38,20 +38,20 @@ public class Ticket {
 
     Date arrivalDate;
 
-    public Ticket(Integer id_passenger,
+    public Ticket(Integer idPassenger,
                   String passenger_name,
                   String passenger_surname,
                   String email,
-                  Integer id_trip,
+                  Integer idTrip,
                   String tripOrigin,
                   String tripDestination,
                   Date departureDate,
                   Date arrivalDate) {
-        this.id_passenger = id_passenger;
+        this.idPassenger = idPassenger;
         this.passenger_name = passenger_name;
         this.passenger_surname = passenger_surname;
         this.email = email;
-        this.id_trip = id_trip;
+        this.idTrip = idTrip;
         this.tripOrigin = tripOrigin;
         this.tripDestination = tripDestination;
         this.departureDate = departureDate;

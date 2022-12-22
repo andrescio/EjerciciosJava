@@ -8,6 +8,9 @@ import com.google.gson.Gson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.SQLDataException;
+import java.util.Optional;
+
 @Service
 public class TicketServiceImpl implements TicketService{
 
@@ -17,7 +20,7 @@ public class TicketServiceImpl implements TicketService{
     Gson gson = new Gson();
 
     @Override
-    public void generateTicket(String passengerString, String tripString) {
+    public void generateTicket(String passengerString, String tripString) throws SQLDataException {
 
         Passenger passenger = gson.fromJson(passengerString, Passenger.class);
 
@@ -32,6 +35,12 @@ public class TicketServiceImpl implements TicketService{
                                     trip.getDestination(),
                                     trip.getDepartureDate(),
                                     trip.getArrivalDate());
+
+        Optional<Ticket> verifyTicket = ticketRepository.findByIdPassengerAndIdTrip(ticket.getIdPassenger(),
+                                                                                      ticket.getIdTrip());
+        if(!verifyTicket.isEmpty()){
+            throw new SQLDataException("Passenger already has a ticket for this trip");
+        }
         ticketRepository.save(ticket);
         System.out.println("Ticket created successfully");
     }

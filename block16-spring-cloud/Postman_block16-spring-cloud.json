@@ -158,6 +158,28 @@
 					"response": []
 				},
 				{
+					"name": "Añadir Passenger a Trip",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/trip/addPassenger/1/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trip",
+								"addPassenger",
+								"1",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Modificar Trip",
 					"request": {
 						"method": "PUT",
@@ -180,6 +202,27 @@
 							"port": "8080",
 							"path": [
 								"trip"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cambiar status a Trip",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/trip/1/nuevoEstado",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trip",
+								"1",
+								"nuevoEstado"
 							]
 						}
 					},
@@ -226,48 +269,6 @@
 					"response": []
 				},
 				{
-					"name": "Eliminar Trip",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/trip/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"trip",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Añadir Passenger a Trip",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/trip/addPassenger/1/1",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"trip",
-								"addPassenger",
-								"1",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Buscar número de Passengers en Trip",
 					"request": {
 						"method": "GET",
@@ -289,28 +290,7 @@
 					"response": []
 				},
 				{
-					"name": "Cambiar status a Trip",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"url": {
-							"raw": "http://localhost:8080/trip/1/nuevoEstado",
-							"protocol": "http",
-							"host": [
-								"localhost"
-							],
-							"port": "8080",
-							"path": [
-								"trip",
-								"1",
-								"nuevoEstado"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Obtiene el estado de un Trip",
+					"name": "Buscar el estado de un Trip",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -324,6 +304,26 @@
 							"path": [
 								"trip",
 								"verify",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Eliminar Trip",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8080/trip/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"trip",
 								"1"
 							]
 						}

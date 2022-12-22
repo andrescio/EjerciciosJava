@@ -1,5 +1,6 @@
 package com.example.block16springcloud.exception;
 
+import feign.FeignException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -45,4 +46,16 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 webRequest);
     }
 
+    // Exception response when a FeignException is thrown
+    @ExceptionHandler(FeignException.class)
+    public ResponseEntity<Object> handleFeignStatusException(FeignException exception, WebRequest webRequest) {
+        HttpStatus errorCode = HttpStatus.CONFLICT;
+        return this.handleExceptionInternal(exception,
+                new CustomError(new Date(),
+                        errorCode.value(),
+                        "Passenger already has a ticket for this trip"),
+                new HttpHeaders(),
+                errorCode,
+                webRequest);
+    }
 }
