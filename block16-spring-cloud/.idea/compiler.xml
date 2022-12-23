@@ -7,17 +7,23 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="block-16-eureka-naming-server" />
+        <module name="block-16-api-gateway" />
         <module name="block16-spring-cloud-ticket" />
         <module name="block16-spring-cloud" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
+      <module name="block-16-api-gateway" target="19" />
+      <module name="block-16-eureka-naming-server" target="19" />
       <module name="block16-spring-cloud" target="19" />
       <module name="block16-spring-cloud-ticket" target="19" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="block-16-api-gateway" options="-parameters" />
+      <module name="block-16-eureka-naming-server" options="-parameters" />
       <module name="block16-spring-cloud" options="-parameters" />
       <module name="block16-spring-cloud-ticket" options="-parameters" />
     </option>

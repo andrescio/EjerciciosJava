@@ -5,6 +5,8 @@
       <list>
         <option value="$PROJECT_DIR$/block16-spring-cloud-ticket/pom.xml" />
         <option value="$PROJECT_DIR$/block16-spring-trip-passenger/pom.xml" />
+        <option value="$PROJECT_DIR$/block-16-eureka-naming-server/pom.xml" />
+        <option value="$PROJECT_DIR$/block-16-api-gateway/pom.xml" />
       </list>
     </option>
   </component>
