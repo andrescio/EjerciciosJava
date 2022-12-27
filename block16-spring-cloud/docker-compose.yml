@@ -1,0 +1,44 @@
+version: "3.2"
+services:
+  eurekaServer:
+    networks:
+      - redDocker
+    image: block-16-eureka-naming-server:0.0.1-SNAPSHOT
+    ports:
+      - "8761:8761"
+  tripAPP:
+    networks:
+      - redDocker
+    image: block16-spring-cloud:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    depends_on:
+      - eurekaServer
+    environment:
+      - SPRING.DATASOURCE.URL = jdbc:postgresql://block16:5432/trip
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE = http://eurekaServer:8761/eureka/
+      - FEIGN=eurekaGateway
+  ticketAPP:
+    networks:
+      - redDocker
+    image: block16-spring-cloud-ticket:0.0.1-SNAPSHOT
+    ports:
+      - "8081:8081"
+    depends_on:
+      - eurekaServer
+    environment:
+      - SPRING.DATASOURCE.URL = jdbc:postgresql://block16:5432/ticket
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE = http://eurekaServer:8761/eureka/
+  eurekaGateway:
+    networks:
+      - redDocker
+    image: block-16-api-gateway:0.0.1-SNAPSHOT
+    ports:
+      - "8082:8082"
+    depends_on:
+      - tripAPP
+      - ticketAPP
+    environment:
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE = http://eurekaServer:8761/eureka/
+networks:
+  redDocker:
