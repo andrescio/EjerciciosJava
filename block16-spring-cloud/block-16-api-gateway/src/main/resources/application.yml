@@ -2,6 +2,8 @@ server:
   port: 8082
 
 eureka:
+  instance:
+    hostname: localhost
   client:
     serviceURL:
       defaultZone: http://localhost:8761/eureka/
@@ -12,11 +14,11 @@ spring:
   cloud:
     gateway:
       routes:
-        - id: NODOTRIPPASSENGER
-          uri: lb://NODOTRIPPASSENGER
+        - id: trip-service
+          uri: lb://trip-service
           predicates:
-            - Path=/**
-        - id: NODOTICKET
-          uri: lb://NODOTICKET
+            - Path=/passenger/**, /trip/**
+        - id: ticket-service
+          uri: lb://ticket-service
           predicates:
-            - Path=/**
+            - Path=/ticket/**

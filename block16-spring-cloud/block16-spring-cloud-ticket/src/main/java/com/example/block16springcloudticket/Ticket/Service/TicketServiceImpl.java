@@ -21,7 +21,6 @@ public class TicketServiceImpl implements TicketService{
 
     @Override
     public void generateTicket(String passengerString, String tripString) throws SQLDataException {
-
         Passenger passenger = gson.fromJson(passengerString, Passenger.class);
 
         Trip trip = gson.fromJson(tripString, Trip.class);
