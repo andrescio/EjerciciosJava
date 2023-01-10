@@ -18,10 +18,10 @@
         <module name="block12-kafka-node2" />
         <module name="block15-security" />
         <module name="ejercicio-controller-chuchi" />
+        <module name="block17-batch" />
         <module name="block16-spring-cloud" />
         <module name="block12-kafka" />
         <module name="block5-command-line-runner" />
-        <module name="block16-spring-cloud-ticket" />
         <module name="block5-properties" />
         <module name="block6-simple-controllers" />
         <module name="block6-person-controllers" />
@@ -33,6 +33,8 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="block12-kafka (1)" target="19" />
+      <module name="block16-spring-cloud" target="19" />
+      <module name="block16-spring-cloud-ticket" target="19" />
       <module name="block7-crud-validation (1)" target="19" />
       <module name="demo" target="17" />
       <module name="LecturaFicherosFiltradoStream" target="19" />
@@ -52,6 +54,7 @@
       <module name="block15-security" options="-parameters" />
       <module name="block16-spring-cloud" options="-parameters" />
       <module name="block16-spring-cloud-ticket" options="-parameters" />
+      <module name="block17-batch" options="-parameters" />
       <module name="block5-command-line-runner" options="-parameters" />
       <module name="block5-logging" options="-parameters" />
       <module name="block5-profiles" options="-parameters" />

@@ -27,6 +27,7 @@
         <option value="$PROJECT_DIR$/block15-security/pom.xml" />
         <option value="$PROJECT_DIR$/block16-spring-cloud/pom.xml" />
         <option value="$PROJECT_DIR$/block16-spring-cloud-ticket/pom.xml" />
+        <option value="$PROJECT_DIR$/block17-batch/pom.xml" />
       </list>
     </option>
   </component>
